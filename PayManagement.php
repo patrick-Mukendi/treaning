@@ -75,6 +75,12 @@ $paySurplus+=$heureNormale*$salaireHoraire;
     <p><?php elseif($paySurplus!=0):?></p>
     <p>Salaire total= <?=$paySurplus;?>$</p>
     <p><?php endif;?></p>
-    
+    <p>Liste des pages annexes</p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/ConvertisseurMoney.php">Convertisseur Money</a>
+    <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Function.php">Les Fonctions</a>
+     <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Calculatrice.php">Calculatrice</a>
+   
 </body>
 </html>

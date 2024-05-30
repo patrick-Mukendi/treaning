@@ -74,6 +74,12 @@ if(isset($devise,$amount,$taux))
         <p><?php endif?></p>
         <button type="submit">Convertir</button>
     </form>
-
+    <p>Liste des pages annexes</p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Function.php">Les Fonctions</a>
+    <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/PayManagement.php">Pay Management</a>
+    <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Calculatrice.php">Calculatrice</a>
+   
 </body>
 </html>

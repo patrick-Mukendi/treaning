@@ -44,5 +44,12 @@ match($operation){
     <p><?php if(isset($resulat)):?></p>
     <p><?=$valeurX;?><?=$operation;?><?=$valeurY;?> = <?=$resulat;?></p>
     <p><?php endif;?></p>
+    <p>Liste des pages annexes</p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/ConvertisseurMoney.php">Convertisseur Money</a>
+    <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Function.php">Les Fonctions</a>
+    <p></p>
+    <a href="https://github.com/patrick-Mukendi/formation/blob/main/PayManagement.php">Pay Management</a>
+    
 </body>
 </html>
