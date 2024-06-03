@@ -1,18 +1,21 @@
 <?php
 
 class FootballTeam {    
-   
-    private string $name;
-   
+	private string $name;
     private int $players;
-   
     private string $managerName;
-   
     private string $coachName;
-   
     private string $createdAt;
-
 	
+    public function __construct(string $name="", int $players=0, string $managerName="", string $coachName="", string $createdAt="")
+	{
+		$this->name = $name;
+		$this->players = $players;
+		$this->managerName = $managerName;
+		$this->coachName = $coachName;
+		$this->createdAt = $createdAt;
+	}
+
 	public function getName(): string {
 		return $this->name;
 	}
