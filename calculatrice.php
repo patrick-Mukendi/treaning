@@ -3,28 +3,28 @@ $valeurX=isset($_POST['valeurx'])?(float)$_POST['valeurx']:0;
 $valeurY=isset($_POST['valeury'])?(float)$_POST['valeury']:0;
 $operation=$_POST['operation']??'+';
 
-match($operation){
+match($operation)
+{
      '+'=> $resulat=$valeurX+$valeurY,
      '*'=> $resultat=$valeurX*$valeurY,
-    '-'=> $resulat=$valeurX-$valeurY,
-    '/'=> $resulat=$valeurY!=0?$valeurX/$valeurY:"Erreur, division par 0 impossible",
+     '-'=> $resulat=$valeurX-$valeurY,
+     '/'=> $resulat=$valeurY!=0?$valeurX/$valeurY:"Erreur, division par 0 impossible",
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-/>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ma page</title>
-    
 </head>
 <body style="padding-left:400px;padding-right:400px;padding-top:50px">
+    <a href="index.php">Retourner</a>
 <h1>Calculatrice</h1>
     <form action="" method="post">
         <p>Première valeur</p>
@@ -44,12 +44,5 @@ match($operation){
     <p><?php if(isset($resulat)):?></p>
     <p><?=$valeurX;?><?=$operation;?><?=$valeurY;?> = <?=$resulat;?></p>
     <p><?php endif;?></p>
-    <p>Liste des pages annexes</p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/ConvertisseurMoney.php">Convertisseur Money</a>
-    <p></p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Function.php">Les Fonctions</a>
-    <p></p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/PayManagement.php">Pay Management</a>
-    
 </body>
 </html>

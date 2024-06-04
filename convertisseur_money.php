@@ -1,45 +1,22 @@
 <?php
+$devise = $_POST['type'] ?? NULL;
+$amount = isset($_POST['amount']) ? (float)$_POST['amount'] : NULL;
+$taux = isset($_POST['taux']) ? (float)$_POST['taux'] : NULL;
 
-$devise=$_POST['type']??NULL;
-$amount=isset($_POST['amount'])?(float)$_POST['amount']:NULL;
-$taux=isset($_POST['taux'])?(float)$_POST['taux']:NULL;
-
-/*
-Si jamais ma variable taux à moins de 4 caractères, dans cette fonction
-je multiplie sa valeur *10 jusqu'à atteindre 4 caractères
-
-function taux(float $taux):float{
-   if (strlen($taux)<4 && $taux>0)
-   {   
-    while(strlen($taux)<4)
-      {
-        $taux*=10;
-      } 
-   }
-
-   return $taux;
-}
-*/
-/**
- *cette fonction convertisseur, me permet de convertir soit de usd en fc soit le contraire
- */
-function convertisseur(string $devise, float $amount,$taux):float|string{
+function convertisseur(string $devise, float $amount,$taux):float|string
+{
     return match ($devise) {
-        'fctousd' => $taux>0?$amount/$taux." usd":"Erreur, Taux doit etre superieur à 0",
-        'usdtofc' => $taux>0?$amount*$taux." fc":"Erreur, Taux doit etre superieur à 0",
-        default=>0
+        'fctousd' => $taux > 0 ? $amount / $taux." usd":"Erreur, Taux doit etre superieur à 0",
+        'usdtofc' => $taux > 0 ? $amount * $taux." fc":"Erreur, Taux doit etre superieur à 0",
+        default => 0
     };
 }
 
-/**
- * dans cette condition, je verifie 
- */
 if(isset($devise,$amount,$taux))
 {
-    //$taux=taux($taux);
-    $convertion=convertisseur($devise,$amount,$taux);
-}
 
+    $convertion=convertisseur($devise, $amount, $taux);
+}
 ?>
 
 <!DOCTYPE html>
@@ -54,6 +31,7 @@ if(isset($devise,$amount,$taux))
     <title>Convertiseur</title>
 </head>
 <body style="padding-top:50px; padding-right:400px;padding-left:400px;">
+        <a href="index.php">Retourner</a>
     <h1>Convertisseur</h1>
     <form  action="" method="post">
         <p>Type de Convertion</p>
@@ -74,12 +52,6 @@ if(isset($devise,$amount,$taux))
         <p><?php endif?></p>
         <button type="submit">Convertir</button>
     </form>
-    <p>Liste des pages annexes</p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Function.php">Les Fonctions</a>
-    <p></p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/PayManagement.php">Pay Management</a>
-    <p></p>
-    <a href="https://github.com/patrick-Mukendi/formation/blob/main/Calculatrice.php">Calculatrice</a>
    
 </body>
 </html>

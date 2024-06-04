@@ -15,56 +15,59 @@ class FootballTeam {
 		$this->coachName = $coachName;
 		$this->createdAt = $createdAt;
 	}
-
-	public function getName(): string {
+	
+	public function getName(): string 
+	{
 		return $this->name;
 	}
 	
-	public function setName(string $name): self {
+	public function setName(string $name): self 
+	{
 		$this->name = $name;
 		return $this;
 	}
 	
 	
-	public function getPlayers(): int {
+	public function getPlayers(): int 
+	{
 		return $this->players;
 	}
-	
-	
-	public function setPlayers(int $players): self {
+
+	public function setPlayers(int $players): self 
+	{
 		$this->players = $players;
 		return $this;
 	}
-	
-	
-	public function getManagerName(): string {
+
+	public function getManagerName(): string 
+	{
 		return $this->managerName;
 	}
 	
-	
-	public function setManagerName(string $managerName): self {
+	public function setManagerName(string $managerName): self 
+	{
 		$this->managerName = $managerName;
 		return $this;
 	}
 	
-	
-	public function getCoachName(): string {
+	public function getCoachName(): string 
+	{
 		return $this->coachName;
 	}
 	
-	
-	public function setCoachName(string $coachName): self {
+	public function setCoachName(string $coachName): self 
+	{
 		$this->coachName = $coachName;
 		return $this;
 	}
 	
-	
-	public function getCreatedAt(): string {
+	public function getCreatedAt(): string 
+	{
 		return $this->createdAt;
 	}
 	
-	
-	public function setCreatedAt(string $createdAt): self {
+	public function setCreatedAt(string $createdAt): self 
+	{
 		$this->createdAt = $createdAt;
 		return $this;
 	}
