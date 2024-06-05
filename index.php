@@ -7,10 +7,10 @@
 </head>
 <body>
     <h1>List of Pages</h1>
-    <a href="convertisseur_money.php">Money Convert</a>
+    <a href="tps\convertisseur_money.php">Money Convert</a>
     <br>
-    <a href="calculatrice.php">Calculator</a>
+    <a href="tps\calculatrice.php">Calculator</a>
     <br>
-    <a href="pay_management.php">Pay Management</a>    
+    <a href="tps\pay_management.php">Pay Management</a>    
 </body>
 </html>

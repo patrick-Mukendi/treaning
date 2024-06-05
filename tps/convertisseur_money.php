@@ -31,7 +31,7 @@ if(isset($devise,$amount,$taux))
     <title>Convertiseur</title>
 </head>
 <body style="padding-top:50px; padding-right:400px;padding-left:400px;">
-        <a href="index.php">Retourner</a>
+        <a href="../index.php">Retourner</a>
     <h1>Convertisseur</h1>
     <form  action="" method="post">
         <p>Type de Convertion</p>

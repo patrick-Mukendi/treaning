@@ -24,7 +24,7 @@ match($operation)
     <title>Ma page</title>
 </head>
 <body style="padding-left:400px;padding-right:400px;padding-top:50px">
-    <a href="index.php">Retourner</a>
+    <a href="../index.php">Retourner</a>
 <h1>Calculatrice</h1>
     <form action="" method="post">
         <p>Première valeur</p>

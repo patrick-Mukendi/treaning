@@ -56,7 +56,7 @@ $paySurplus += $heureNormale * $salaireHoraire;
 
 </head>
 <body style="padding-left:400px;padding-right:400px;padding-top:50px">
-    <a href="index.php">Retourner</a>
+    <a href="../index.php">Retourner</a>
     <h1>Pay Management</h1>
     <form action="" method="get">
         <p>Salaire Horaire</p>
