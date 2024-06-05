@@ -7,7 +7,7 @@ class FootballTeam {
     private string $coachName;
     private string $createdAt;
 	
-    public function __construct(string $name="", int $players=0, string $managerName="", string $coachName="", string $createdAt="")
+    public function __construct(string $name, int $players, string $managerName, string $coachName, string $createdAt)
 	{
 		$this->name = $name;
 		$this->players = $players;
