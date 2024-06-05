@@ -4,12 +4,6 @@ require_once "FootballTeam.php";
 $team1 = new FootballTeam(name: "Real Madrid", coachName: "Ancelotti", players: 25, managerName: "Perez", createdAt: "30-juin-1960" );
 $team2=clone $team1;
 
-$team1->setName("Real Madrid")
-      ->setCoachName("Ancelotti")
-      ->setPlayers(25)
-      ->setManagerName("Perez")
-      ->setCreatedAt("30-juin-1960");
-
 
 $team2->setName("Barcelona")
       ->setCoachName("Xavi")
