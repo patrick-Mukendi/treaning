@@ -1,5 +1,4 @@
 <?php
-
 class FootballTeam {    
 	private string $name;
     private int $players;
