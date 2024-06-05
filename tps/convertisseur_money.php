@@ -12,10 +12,9 @@ function convertisseur(string $devise, float $amount,$taux):float|string
     };
 }
 
-if(isset($devise,$amount,$taux))
+if(! empty($_POST))
 {
-
-    $convertion=convertisseur($devise, $amount, $taux);
+    $convertion = convertisseur($devise, $amount, $taux);
 }
 ?>
 

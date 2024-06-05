@@ -8,9 +8,9 @@ $isError = NULL;
 $paySurplus = 0;
 $operation1 = ($heureNormale<$nombreHeure) ? $nombreHeure-$heureNormale : 0;
 
-if($salaireHoraire < 0 || $nombreHeure < 0 || $nombreHeureWeekend < 0 || $heureNormale < 0)
+if($salaireHoraire < 0 || $nombreHeure < 0 || $nombreHeureWeekend < 0 || $heureNormale < 0 || empty($_POST))
 {
-    $isError = "Valeur negative non valide";
+    $isError = "Valeur negative ou vide non valide";
 }
 else
 {
@@ -34,7 +34,8 @@ else
        $operation1 -= $operation1;
     }
 
-    if($operation1 != 0){
+    if($operation1 != 0)
+    {
        $paySurplus += $operation1 * ($salaireHoraire * 150 / 100);
     }
    }
