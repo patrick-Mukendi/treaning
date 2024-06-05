@@ -1,5 +1,6 @@
 <?php
-class FootballTeam {    
+class FootballTeam
+{    
 	private string $name;
     private int $players;
     private string $managerName;
@@ -25,7 +26,6 @@ class FootballTeam {
 		$this->name = $name;
 		return $this;
 	}
-	
 	
 	public function getPlayers(): int 
 	{
