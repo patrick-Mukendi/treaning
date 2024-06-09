@@ -1,0 +1,10 @@
+- Créez une classe nommée Person avec les propriétés name et age. Ajoutez un constructeur pour initialiser ces propriétés et une méthode pour afficher le nom et l'âge.
+- Créez une classe Employee qui hérite de la classe Person. Ajoutez une propriété jobTitle et une méthode pour afficher toutes les informations.
+- Créez une interface Renderable avec une méthode render(). Implémentez cette interface dans une classe Page qui affiche un message.
+- Ajoutez une méthode statique à la classe MathHelper pour calculer le carré d'un nombre.
+- Créez une classe abstraite Animal avec une méthode abstraite makeSound(). Créez des classes Dog et Cat qui héritent de Animal et implémentent la méthode makeSound().
+- Créez une classe BankAccount avec des propriétés privées balance et accountNumber. Ajoutez des méthodes pour déposer et retirer de l'argent, en vérifiant le solde pour les retraits.
+- Créez une classe Circle avec une constante PI et une méthode pour calculer l'aire d'un cercle.
+- Créez une classe Division avec une méthode divide qui lance une exception si le diviseur est zéro.
+- Créez un trait Logger avec une méthode log(). Utilisez ce trait dans une classe Application.
+- Créez une classe Product avec des propriétés name et price. Ajoutez une méthode magique __clone pour afficher un message lors du clonage.

@@ -1,9 +1,16 @@
 <?php
-class Circle {
-    const PI=3.14;
-    private int $rayon;
+class Circle
+{
+    private float $rayon;
+    const PI = 3.14;
 
-    public function calculAirCercle(int $rayon): int {
-        return PI * $rayon**2; 
+    public function __construct(float $rayon)
+    {
+        $this->rayon = $rayon;
+    }
+
+    public function calculAirCercle(): float
+    {
+        return self::PI * $this->rayon ** 2;
     }
 }

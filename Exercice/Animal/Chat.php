@@ -5,6 +5,6 @@ class Chat extends Animal
 {
     public function makeSound(): void
     {
-        echo 'Im a Chat';
+        echo 'Im a Cat';
     }
 }

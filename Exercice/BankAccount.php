@@ -1,35 +1,48 @@
 <?php
 final class BankAccount
 {
-	private float $balance=0.0;
-    private readonly ?string $accountNumber;
+    private float $balance = 0;
+    private readonly string $accountNumber;
 
-    private function __construct 
-
-	public function getBalance(): int 
+    private function __construct(string $accountNumber)
     {
-        return $this -> balance;
+        $this->accountNumber = $accountNumber;
     }
 
-    public function deposer(int $amount, string $accountNumber):int|string
+    public static function create(string $accountNumber): self
     {
-        $this -> accoutNumber = $accountNumber;
-        
-        if($amount>0)
+        if (empty($accountNumber)) 
         {
-          return   $this -> balance=$amount;
+            throw new \Exception("le numéro du compte ne doit pas être vide");
         }
-        return 'Valeur invalide';
+        return new self($accountNumber);
     }
 
-    public function retrait (int $accountNumber, $amount): int|string
+    public function deposite(float $amount): void
     {
-        $this -> accountNumber = $accountNumber;
-
-        if($balance>$amount)
+        if ($amount <= 0) 
         {
-            return $balance-$amount;
+            throw new \Exception("Votre depot doit être >= 0");
         }
-        return 'Le Montant est trop Elevé ';
+        $this->balance = $amount;
+    }
+
+    public function withdraw(float $amount): void
+    {
+        if ($amount > $this->balance) 
+        {
+            throw new \Exception("vous ne pouvez retire plus que votre balance");
+        }
+        $this->balance -= $amount;
+    }
+
+    public function getAccountNumber(): string
+    {
+        return $this->accountNumber;
+    }
+
+    public function getBalance(): float
+    {
+        return $this->balance;
     }
 }
