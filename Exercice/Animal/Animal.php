@@ -1,4 +1,5 @@
 <?php
-abstract class Animal{
-    abstract function makeSound(): void;
+abstract class Animal
+{
+    abstract public function makeSound(): void;
 }
