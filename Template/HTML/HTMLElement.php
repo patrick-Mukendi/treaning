@@ -1,10 +1,5 @@
 <?php
 abstract class HTMLElement{
-    private string $tag;
-    private string $attributs;
-    private string $contenus;
-
-    abstract public function __construct(string $tag, string $attributs, string $contenus);
 
     protected function button()
     {
