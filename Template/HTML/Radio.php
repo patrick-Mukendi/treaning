@@ -1,21 +1,29 @@
 <?php
 require_once 'HTMLElement.php';
 
-<div>
-<input type="radio" id="huey" name="drone" value="huey" checked />
-<label for="huey">Huey</label>
-</div>
 
 class radio extends HTMLElement
 {
-    public function __construct (private string $name, private string $value, )
+    public function __construct (private string $name = "", private string $value = "", private string $label = "" )
     {
         $this->name = $name;
         $this->value = $value;
+        $this->label = $label;
     }
 
-    private function fieldset(...,)
+    public function fieldset(...$valeur)
+    {
+            $content = implode('', $valeur);
+            return "<fieldset>{$content}</fieldset>";
+    }
 
+    public function radio(string $name, string $value, string $label, string $checked = ""){
+        
+        $this->name = $name;
+        $this->value = $value;
+        $this->label = $label;
 
+       return "<input type='radio'  name={$name}. value={$value} {$checked} /> 
+                <label for={$label}>{$label}</label>";
+    }
 } 
-

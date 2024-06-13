@@ -3,7 +3,7 @@ require_once 'HTMLElement.php';
 
 class Button extends HTMLElement {
    
-    public function __construct( private string $tag = 'p', private string $attributs, private string $contenus)
+    public function __construct( private string $contenus, private string $attributs = "submit", private string $tag = 'p')
     {
         $this->tag = $tag;
         $this->attributs = $attributs;
@@ -15,6 +15,6 @@ class Button extends HTMLElement {
     }
 
     public function submit(){
-        return $this->tag("<{$this->attributs} type='submit'>{$this->contenus}</{$this->attributs}>");
+        return $this->tag("<button type={$this->attributs}>{$this->contenus}</button>");
     }
 }

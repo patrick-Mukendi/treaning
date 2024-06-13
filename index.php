@@ -1,3 +1,16 @@
+<?php
+function test(...$test){
+  $content = implode('', $test);
+  return "<form>{$content}</form>";
+}
+?>
+
+<div>
+<?= test("<input type='text'    ></input>",'<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>');?>
+<input type="radio" id="huey" name="drone" value="huey" checked />
+<label for="huey">Huey</label>
+</div>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

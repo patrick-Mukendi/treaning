@@ -21,9 +21,9 @@ abstract class HTMLElement{
         return 'checkbox';
     }
 
-    protected function radio()
+    protected function radio(string $name, string $value, string $label, string $checked = "")
     {
-        return 'radio';
+        return "radio";
     }
    /* <button class="favorite styled" type="button">Add to favorites</button>
     <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10" />
