@@ -1,10 +1,9 @@
 <?php
-/*function test(...$test){
+function test(...$test){
   $content = implode('', $test);
   return "<form>{$content}</form>";
 }
 ?>
-*/
 
 <div>
 <?= test("<input type='text'    ></input>",'<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>');?>
