@@ -8,3 +8,12 @@
 - Créez une classe Division avec une méthode divide qui lance une exception si le diviseur est zéro.
 - Créez un trait Logger avec une méthode log(). Utilisez ce trait dans une classe Application.
 - Créez une classe Product avec des propriétés name et price. Ajoutez une méthode magique __clone pour afficher un message lors du clonage.
+
+<?php
+ 
+require_once 'Template/HTML/Input.php';
+
+$a = new Input("text", "nom", "nom");
+echo $a->render();
+
+?>

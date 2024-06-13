@@ -1,23 +1,36 @@
 <?php
 require_once 'HTMLElement.php';
 
-class Input extends HTMLElement{
-    public function __construct (private string $type, private string $name, private string $content, private string $tag = 'p', private string $value = "")
+
+class Input extends HTMLElement implements Render
+{
+    /* public function __construct ($tag,  $attributs = [], $content = '')
+    {
+        $this->tag = $tag;
+        $this->attributs = $attributs;
+        $this->content = $content;
+    }
+	*/
+    public function __construct (private string $type, private string $name, private string $value = '')
     {
         $this->type = $type;
         $this->name = $name;
         $this->value = $value;
-        $this->content = $content;
-        $this->tag = $tag;
     }
-
-    private function  tag($tag)
+	
+   /* private function attributs()
     {
-        return "<{$this->tag}>{$tag}</{$this->tag}>";
+        $attributs = '';
+        
+        foreach($this->attributs as $key=>$values)
+        {
+            $attributs .= sprintf('%s="%s"', $key, $values);
+        }
+        return $attributs;
     }
-
-    public function input()
+    */
+    public function render()
     {
-        return $this->tag("<input type='{$this->type}' name='{$this->name}' value='{$this->value}'>{$this->content}</input>");
-    } 
+        return sprintf('<input type="%s" name="%s" value="%s">', $this->type, $this->name, $this->value);
+    }
 }

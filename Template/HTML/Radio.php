@@ -2,13 +2,13 @@
 require_once 'HTMLElement.php';
 
 
-class Radio extends HTMLElement
-{
-    public function __construct (private string $name = "", private string $value = "", private string $label = "" )
-    {
-        $this->name = $name;
-        $this->value = $value;
-        $this->label = $label;
+class Radio extends HTMLElement implements Render
+{ 
+    public function __construct ($tag,  $attributs = [], $content = '')
+    { 
+        $this->tag = $tag;
+        $this->attributs = $attributs;
+        $this->content = $content;
     }
 
     public function fieldset(...$valeur)

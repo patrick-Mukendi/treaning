@@ -1,22 +1,32 @@
 <?php
 require_once 'HTMLElement.php';
 
-class Textarea extends HTMLElement{
-    public function __construct(private string $tag = 'p', private string $name, private int $rows, private int $cols)
+class Textarea extends HTMLElement implements Render
+{
+    public function __construct($name, $content, $attributs = [] )
     {
         $this->name = $name;
-        $this->rows = $rows;
-        $this->cols = $cols;
-        $this->tag = $tag;
+        $this->attributs = $attributs;
+        $this->content = $content;
     }
 
-    private function  tag($tag)
+    private function attribut()
     {
-        return "<{$this->tag}>{$tag}</{$this->tag}>";
+        $attributs = '';
+        
+        foreach($this->attributs as $key=>$values)
+        {
+            $attributs .= sprintf('%s="%s"', $key, $values);
+        }
+        return $attributs;
     }
 
-    public function textarea()
+    private function  render()
     {
-        return $this->tag("<textarea name='{$this->name}' rows='{$this->rows}' cols='{$this->cols}'>{$this->content}</textarea>");
+        return sprintf(
+            '<textarea name="%s" %s>%s</textarea>', 
+            $this->name, 
+            $this->attribut(),
+            $this->content);
     }
 }

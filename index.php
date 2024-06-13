@@ -1,25 +1,3 @@
-<?php
- 
-require_once 'Template/forme.php';
-
-$form = new Form($_POST);
-
-?>
-
-<form action="#" methode="post">
-<?php
-
-echo $form->input('username');
-
-echo $form->input('password');
-echo $form->input('password');
-echo $form->submit();
-echo $form->submit();
-?>
-
-</form>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
