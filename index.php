@@ -1,15 +1,24 @@
 <?php
-function test(...$test){
-  $content = implode('', $test);
-  return "<form>{$content}</form>";
-}
+ 
+require_once 'Template/forme.php';
+
+$form = new Form($_POST);
+
 ?>
 
-<div>
-<?= test("<input type='text'    ></input>",'<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>','<button type="submit">Envoyer</button>');?>
-<input type="radio" id="huey" name="drone" value="huey" checked />
-<label for="huey">Huey</label>
-</div>
+<form action="#" methode="post">
+<?php
+
+echo $form->input('username');
+
+echo $form->input('password');
+echo $form->input('password');
+echo $form->submit();
+echo $form->submit();
+?>
+
+</form>
+
 
 <!DOCTYPE html>
 <html lang="en">

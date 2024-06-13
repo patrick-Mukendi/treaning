@@ -2,7 +2,7 @@
 require_once 'HTMLElement.php';
 
 
-class radio extends HTMLElement
+class Radio extends HTMLElement
 {
     public function __construct (private string $name = "", private string $value = "", private string $label = "" )
     {
@@ -17,8 +17,8 @@ class radio extends HTMLElement
             return "<fieldset>{$content}</fieldset>";
     }
 
-    public function radio(string $name, string $value, string $label, string $checked = ""){
-        
+    public function radio(string $name, string $value, string $label, string $checked = "")
+    {        
         $this->name = $name;
         $this->value = $value;
         $this->label = $label;

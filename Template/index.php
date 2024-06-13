@@ -1,5 +1,5 @@
 <?php
-require_once 'Forme.php';
+require_once 'forme.php';
 
 $form = new Form($_POST);
 
