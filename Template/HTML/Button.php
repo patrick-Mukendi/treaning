@@ -2,9 +2,9 @@
 require_once 'HTMLElement.php';
 require_once 'Template/Interface/Render.php';
 
-class Button extends HTMLElement {
-     
-    public function __construct($tag, $attributs = [], $content = '')
+class Button extends HTMLElement 
+{
+    public function __construct(private string $tag, private array $attributs = [], private string $content = '')
     {
         $this->tag = $tag;
         $this->attributs = $attributs;
@@ -14,7 +14,7 @@ class Button extends HTMLElement {
     private function attribut()
     {
         $attributs = '';
-        
+    
         foreach($this->attributs as $key=>$values)
         {
             $attributs .= sprintf('%s="%s" ]', htmlspecialchars($key), htmlspecialchars($values));

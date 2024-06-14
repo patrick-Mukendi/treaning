@@ -1,6 +1,6 @@
 <?php
- class HTMLElement {
-
+ class HTMLElement 
+ {
     private string $tag;
     private array $attributes;
     private string $content;

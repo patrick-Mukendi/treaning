@@ -1,19 +1,16 @@
 <?php
 class Cookie
-{
-    private $names;
-    private $values;
-
-    public static function set(string $name, string $values, float $time=3600)
+{ 
+    public static function set(string $name, string $values, float $time = 3600)
     {
         setcookie($name, $values, time() + $time, '/', '', true, true);
     }
 
-    public static function get(string $name,  string $type)
+    public static function get(string $name,  string $type): string
     {
         if(isset($_COOKIE[$name]))
         {
-            return 'ID de session ' .$_COOKIE[$name]. 'type User '.$type;
+            return 'ID de session ' .$_COOKIE[$name]. 'type User ' .$type;
         }
         return 'Pas de thème préféré défini';
     }

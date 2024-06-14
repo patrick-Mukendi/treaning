@@ -4,17 +4,17 @@ require_once 'Interface/Render.php';
 class Select implements Render
 {
     private string $name;
-    private $options;
-    private $attributs;
+    private array $options;
+    private array $attributs;
 
-    public function __construct(string $name,  $options = [],  $attributs = [])
+    public function __construct( $name,  $options = [],  $attributs = [])
     {
         $this->name = $name;
         $this->options = $options;
         $this->attributs = $attributs;
     }
 	
-    private function attribut()
+    private function attribut(): string
     {
         $attribut ='';
 
@@ -25,7 +25,7 @@ class Select implements Render
         return $attribut;
     }
 
-    private function option()
+    private function option(): string
     {
         $option ='';
 
@@ -36,7 +36,7 @@ class Select implements Render
         return $option;
     }
 
-    public function render()
+    public function render(): string
     {
         return sprintf('<select name="%s" %s>%s</select>',$this->name, $this->attribut(), $this->option() );
     }

@@ -8,7 +8,7 @@ class FileUpload
 
         if (is_uploaded_file($_FILES["monfichier"]["tmp_name"])) 
         {
-            if (rename($_FILES["monfichier"]["tmp_name"],$repertoireDestination.$nomDestination)) 
+            if (rename($_FILES["monfichier"]["tmp_name"], $repertoireDestination.$nomDestination)) 
             {
                 echo "Fichier uploadé avec succès";
             } 

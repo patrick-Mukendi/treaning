@@ -4,7 +4,7 @@ require_once '../Interface/Render.php';
 
 class Radio extends HTMLElement implements Render
 { 
-    public function __construct (private string $name, private $content = '', private bool $checked=true, private array $attributs = [])
+    public function __construct (private string $name, private string $content = '', private bool $checked = true, private array $attributs = [])
     { 
         $this->name = $name;
         $this->attributs = $attributs;
@@ -23,7 +23,7 @@ class Radio extends HTMLElement implements Render
         return $attribut;
     }
 
-    public function render()
+    public function render(): string
     {
         $checked =  $this->checked ? "checked" : "";
         return sprintf('<input  %s %s/><label for="%s">%s</label> ', $this->attributs(), $checked, $this->name, $this->content);

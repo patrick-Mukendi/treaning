@@ -9,11 +9,15 @@
 - Créez un trait Logger avec une méthode log(). Utilisez ce trait dans une classe Application.
 - Créez une classe Product avec des propriétés name et price. Ajoutez une méthode magique __clone pour afficher un message lors du clonage.
 
-<?php
- 
-require_once 'Template/HTML/Input.php';
 
-$a = new Input("text", "nom", "nom");
-echo $a->render();
+//Test upload
+<html>
+<body>
+  <form enctype="multipart/form-data" action="Template/FileUpload.php" method="post">
+    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+    Transfère le fichier <input type="file" name="monfichier" />
+    <input type="submit" />
+  </form>
+</body>
+</html>
 
-?>

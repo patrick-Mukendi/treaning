@@ -12,7 +12,7 @@ class Input extends HTMLElement implements Render
         $this->render();
     }
 	
-    public function render()
+    public function render(): string
     {
         return sprintf('<input type="%s" name="%s" value="%s">', $this->type, $this->name, $this->value);
     }

@@ -1,31 +1,3 @@
-
-<?php
-require_once'Template/Form.php';
-require_once'Template/Select.php';
-require_once'Template/HTML/Input.php';
-require_once'Template/HTML/Button.php';
-
-$form = new Form(['method' => 'post']); 
-$form->addElement(new Input('text', 'username', 'Patrick')); 
-$form->addElement(new Input('password', 'password')); 
-$form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' => 'dropdown', 'id'=> 'patrick']));
-$form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
-
-echo $form->render();
-?>
-
-
-<html>
-<body>
-  <form enctype="multipart/form-data" action="Template/FileUpload.php" method="post">
-    <input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-    Transfère le fichier <input type="file" name="monfichier" />
-    <input type="submit" />
-  </form>
-</body>
-</html>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

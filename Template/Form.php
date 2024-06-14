@@ -3,8 +3,8 @@ require_once 'Interface/Render.php';
 
 class Form implements Render 
 {
-    private $attributs;
-    private $content;
+    private array $attributs;
+    private array $content;
 
     public function __construct ($attributs = [] )
     {
@@ -18,7 +18,7 @@ class Form implements Render
         $this->content[] =  $elements->render();
     }
 
-    private function contents()
+    private function contents(): string
     {
         $attribut = '';
 
@@ -29,7 +29,7 @@ class Form implements Render
         return $attribut;
     }
 
-    public function render()
+    public function render(): string
     {
         $element = '<form' . $this->contents().'>';
 

@@ -3,25 +3,25 @@ require_once 'HTMLElement.php';
 
 class Textarea extends HTMLElement implements Render
 {
-    public function __construct($name, $content, $attributs = [] )
+    public function __construct(private string $name, private string $content, private array $attributs = [] )
     {
         $this->name = $name;
         $this->attributs = $attributs;
         $this->content = $content;
     }
 
-    private function attribut()
+    private function attribut(): string
     {
         $attributs = '';
         
-        foreach($this->attributs as $key=>$values)
+        foreach($this->attributs as $key => $values)
         {
             $attributs .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $attributs;
     }
 
-    private function  render()
+    private function  render(): string
     {
         return sprintf(
             '<textarea name="%s" %s>%s</textarea>', 
