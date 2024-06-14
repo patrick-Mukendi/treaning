@@ -1,20 +1,29 @@
 <?php
 require_once 'HTMLElement.php';
+require_once 'Template/Interface/Render.php';
 
 class Button extends HTMLElement {
-   
-    public function __construct( private string $contenus, private string $attributs = "submit", private string $tag = 'p')
+     
+    public function __construct($tag, $attributs = [], $content = '')
     {
         $this->tag = $tag;
         $this->attributs = $attributs;
-        $this->contenus = $contenus;
+        $this->content = $content;
+    }
+    
+    private function attribut()
+    {
+        $attributs = '';
+        
+        foreach($this->attributs as $key=>$values)
+        {
+            $attributs .= sprintf('%s="%s"', htmlspecialchars($key0), htmlspecialchars($values));
+        }
+        return $attributs;
     }
 
-    private function  tag($tag){
-        return "<{$this->tag}>{$tag}</{$this->tag}>";
-    }
-
-    public function submit(){
-        return $this->tag("<button type={$this->attributs}>{$this->contenus}</button>");
+    public function render()
+    {
+        return sprintf('<button type="%s" %s >%s</button>', $this->tag, $this->attribut(), $this->content);
     }
 }

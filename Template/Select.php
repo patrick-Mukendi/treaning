@@ -20,7 +20,7 @@ class Select implements Render
 
         foreach($this->options as $key => $values)
         {
-            $option .= sprintf('%s="%s"', $key, $values);
+            $option .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $option;
     }

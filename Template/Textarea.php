@@ -16,7 +16,7 @@ class Textarea extends HTMLElement implements Render
         
         foreach($this->attributs as $key=>$values)
         {
-            $attributs .= sprintf('%s="%s"', $key, $values);
+            $attributs .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $attributs;
     }

@@ -1,10 +1,10 @@
 <?php
 require_once 'HTMLElement.php';
-
+require_once 'Template/Interface/Render.php';
 
 class Radio extends HTMLElement implements Render
 { 
-    public function __construct ($tag,  $attributs = [], $content = '')
+    public function __construct (private $tag,  private $attributs = [], private $content = '')
     { 
         $this->tag = $tag;
         $this->attributs = $attributs;

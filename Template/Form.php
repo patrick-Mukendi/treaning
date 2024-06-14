@@ -23,7 +23,7 @@ class Form implements Render
 
         foreach($this->attributs as $key => $values)
         {
-            $attribut .= sprintf('%s="%s"', $key, $values);
+            $attribut .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $attribut;
     }
@@ -37,7 +37,7 @@ class Form implements Render
             $element .= $values;
         }
         $element .= '</form>';
-        
+
         return $element;
     }
 }
