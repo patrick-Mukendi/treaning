@@ -9,6 +9,7 @@ class Input extends HTMLElement implements Render
         $this->type = $type;
         $this->name = $name;
         $this->value = $value;
+        $this->render();
     }
 	
     public function render()
@@ -16,3 +17,4 @@ class Input extends HTMLElement implements Render
         return sprintf('<input type="%s" name="%s" value="%s">', $this->type, $this->name, $this->value);
     }
 }
+

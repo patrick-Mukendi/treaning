@@ -6,15 +6,16 @@ class Form implements Render
     private $attributs;
     private $content;
 
-    public function __construct ($attributs = [], $content = [])
+    public function __construct ($attributs = [] )
     {
-        $this->attributs = $attributs;
-        $this->content = $content;
+        $this->attributs= $attributs;
+        
     }
 
     public function addElement($element)
     {
-        $this->content[] = $element;
+        $elements = $element;
+        $this->content[] =  $elements->render();
     }
 
     private function contents()
@@ -23,7 +24,7 @@ class Form implements Render
 
         foreach($this->attributs as $key => $values)
         {
-            $attribut .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
+            $attribut .= sprintf('%s="%s"',  $key, $values);
         }
         return $attribut;
     }
@@ -32,7 +33,7 @@ class Form implements Render
     {
         $element = '<form' . $this->contents().'>';
 
-        foreach ($this->contents as $values )
+        foreach ($this->content as $values )
         {
             $element .= $values;
         }

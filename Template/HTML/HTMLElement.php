@@ -2,7 +2,7 @@
  class HTMLElement {
 
     private string $tag;
-    private  $attributes;
+    private array $attributes;
     private string $content;
 
     public function __construct($tag, $attributs = [], $content = '')

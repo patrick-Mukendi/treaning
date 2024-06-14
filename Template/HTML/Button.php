@@ -17,13 +17,13 @@ class Button extends HTMLElement {
         
         foreach($this->attributs as $key=>$values)
         {
-            $attributs .= sprintf('%s="%s"', htmlspecialchars($key0), htmlspecialchars($values));
+            $attributs .= sprintf('%s="%s" ]', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $attributs;
     }
 
     public function render()
     {
-        return sprintf('<button type="%s" %s >%s</button>', $this->tag, $this->attribut(), $this->content);
+        return sprintf('<%s %s >%s</%s>', $this->tag, $this->attribut(), $this->content, $this->tag);
     }
 }

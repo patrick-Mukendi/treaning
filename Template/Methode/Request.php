@@ -1,25 +1,13 @@
 <?php
 class Request
 {
-    static function get( $key,  $methode )
+    public static function get( $key,  $user )
     {
-        return match (true) 
-        {
-             $methode = 'Guest'=> isset($_GET[$key])??NULL ,
-             $methode = 'POST'=> isset($_POST[$key])??NULL,
-             default
-                    => NULL
-        };
+        return isset($_GET[$key])??NULL;
     }
 
-    static function get( $key,  $methode )
+    public static function post( $key,  $user )
     {
-        return match (true) 
-        {
-             $methode = 'Guest'=> isset($_GET[$key])??NULL ,
-             $methode = 'POST'=> isset($_POST[$key])??NULL,
-             default
-                    => NULL
-        };
+        return isset($_POST[$key])??NULL;
     }
 }

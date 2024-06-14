@@ -4,26 +4,28 @@ require_once 'Template/Interface/Render.php';
 
 class Radio extends HTMLElement implements Render
 { 
-    public function __construct (private $tag,  private $attributs = [], private $content = '')
+    public function __construct (private string $name, private $content = '', private bool $checked=true, private array $attributs = [])
     { 
-        $this->tag = $tag;
+        $this->name = $name;
         $this->attributs = $attributs;
         $this->content = $content;
+        $this->checked = $checked;
     }
 
-    public function fieldset(...$valeur)
+    private function attributs(): string
     {
-            $content = implode('', $valeur);
-            return "<fieldset>{$content}</fieldset>";
+        $attribut='';
+
+        foreach($this->attributs as $key => $values)
+        {
+            $attribut .= sprintf('%s="%s" ', $key, $values);
+        }
+        return $attribut;
     }
 
-    public function radio(string $name, string $value, string $label, string $checked = "")
-    {        
-        $this->name = $name;
-        $this->value = $value;
-        $this->label = $label;
-
-       return "<input type='radio'  name={$name}. value={$value} {$checked} /> 
-                <label for={$label}>{$label}</label>";
+    public function render()
+    {
+        $checked =  $this->checked ? "checked" : "";
+        return sprintf('<input  %s %s/><label for="%s">%s</label> ', $this->attributs(), $checked, $this->name, $this->content);
     }
 } 

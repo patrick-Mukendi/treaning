@@ -14,26 +14,26 @@ class Select implements Render
         $this->attributs = $attributs;
     }
 	
-    private function option()
-    {
-        $option ='';
-
-        foreach($this->options as $key => $values)
-        {
-            $option .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
-        }
-        return $option;
-    }
-
     private function attribut()
     {
         $attribut ='';
 
         foreach($this->attributs as $key => $values)
         {
-            $attribut .= sprintf('<option value="%s">%s</option>', $key, $values);
+            $attribut .= sprintf('%s="%s" ', htmlspecialchars($key), htmlspecialchars($values));
         }
         return $attribut;
+    }
+
+    private function option()
+    {
+        $option ='';
+
+        foreach($this->options as $key => $values)
+        {
+            $option .= sprintf('<option value="%s">%s</option>', $key, $values);
+        }
+        return $option;
     }
 
     public function render()
