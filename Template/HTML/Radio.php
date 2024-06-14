@@ -1,6 +1,6 @@
 <?php
 require_once 'HTMLElement.php';
-require_once 'Template/Interface/Render.php';
+require_once '../Interface/Render.php';
 
 class Radio extends HTMLElement implements Render
 { 
