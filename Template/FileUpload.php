@@ -5,10 +5,11 @@ class FileUpload
     {
         $repertoireDestination = dirname(__FILE__)."/".$target_dir."/";
         $nomDestination = $name.date("YmdHis")."txt";
-
-        if (is_uploaded_file($_FILES["monfichier"]["tmp_name"])) 
+        if(isset($_FILES["monfichier"]["tmp_name"]))
         {
-            if (rename($_FILES["monfichier"]["tmp_name"], $repertoireDestination.$nomDestination)) 
+        if (is_uploaded_file($_FILES["monfichier"]["tmp_name"]) && isset($_FILES)) 
+        {
+            if ( rename($_FILES["monfichier"]["tmp_name"], $repertoireDestination.$nomDestination)) 
             {
                 echo "Fichier uploadé avec succès";
             } 
@@ -22,4 +23,6 @@ class FileUpload
             echo "Le fichier n'a pas été uploadé ";
         }
     }
+    }
 }
+

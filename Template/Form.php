@@ -1,7 +1,7 @@
 <?php
-require_once 'Interface/Render.php';
+require_once 'HTML/HTMLElement.php';
 
-class Form implements Render 
+class Form extends  HTMLElement
 {
     private array $attributs;
     private array $content;
@@ -10,6 +10,15 @@ class Form implements Render
     {
         $this->attributs= $attributs;
         
+    }
+    private function attribut() : string
+    {
+        $attributs = '';
+        foreach($this->attributs as $key => $value)
+        {
+            $attributs .= sprintf('%s="%s" ', $key, $value);
+        }
+        return $attributs;
     }
 
     public function addElement($element)
@@ -20,18 +29,18 @@ class Form implements Render
 
     private function contents(): string
     {
-        $attribut = '';
+        $content = '';
 
         foreach($this->attributs as $key => $values)
         {
-            $attribut .= sprintf('%s="%s"',  $key, $values);
+            $content .= sprintf('%s="%s"',  $key, $values);
         }
-        return $attribut;
+        return $content;
     }
 
     public function render(): string
     {
-        $element = '<form' . $this->contents().'>';
+        $element = sprintf('<form %s >', $this->attribut());
 
         foreach ($this->content as $values )
         {

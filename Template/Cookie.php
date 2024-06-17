@@ -1,9 +1,10 @@
 <?php
 class Cookie
 { 
-    public static function set(string $name, string $values, float $time = 3600)
+    public static function set(string $name, string $values, float $time = 3600) 
     {
         setcookie($name, $values, time() + $time, '/', '', true, true);
+        
     }
 
     public static function get(string $name,  string $type): string

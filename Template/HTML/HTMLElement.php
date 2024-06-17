@@ -1,5 +1,6 @@
 <?php
- class HTMLElement 
+
+ class HTMLElement
  {
     private string $tag;
     private array $attributes;
@@ -11,4 +12,9 @@
         $this->attributs = $attributs;
         $this->content = $content;
     } 
+
+    public function render() : string
+    {
+        return 'Je suis render';
+    }
 }

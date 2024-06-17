@@ -1,7 +1,7 @@
 <?php
-require_once 'HTMLElement.php';
+require_once 'HTML/HTMLElement.php';
 
-class Textarea extends HTMLElement implements Render
+class Textarea extends HTMLElement 
 {
     public function __construct(private string $name, private string $content, private array $attributs = [] )
     {
@@ -21,7 +21,7 @@ class Textarea extends HTMLElement implements Render
         return $attributs;
     }
 
-    private function  render(): string
+    public function  render(): string
     {
         return sprintf(
             '<textarea name="%s" %s>%s</textarea>', 

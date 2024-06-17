@@ -11,10 +11,10 @@
 </head>
 <body style="padding:20px;">
     <h1>List of Pages</h1>
-    <a href="tps\convertisseur_money.php">Money Convert</a>
+    <a href="convertisseur_money.php">Money Convert</a>
     <br>
-    <a href="tps\calculatrice.php">Calculator</a>
+    <a href="calculatrice.php">Calculator</a>
     <br>
-    <a href="tps\pay_management.php">Pay Management</a>    
+    <a href="pay_management.php">Pay Management</a>    
 </body>
 </html>

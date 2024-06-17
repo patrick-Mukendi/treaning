@@ -1,7 +1,7 @@
 <?php
-require_once 'Interface/Render.php';
+require_once 'HTML/HTMLElement.php';
 
-class Select implements Render
+class Select extends HTMLElement
 {
     private string $name;
     private array $options;

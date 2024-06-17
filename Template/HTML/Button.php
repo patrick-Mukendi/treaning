@@ -1,6 +1,6 @@
 <?php
 require_once 'HTMLElement.php';
-require_once 'Template/Interface/Render.php';
+
 
 class Button extends HTMLElement 
 {
@@ -22,7 +22,7 @@ class Button extends HTMLElement
         return $attributs;
     }
 
-    public function render()
+    public function render() : string
     {
         return sprintf('<%s %s >%s</%s>', $this->tag, $this->attribut(), $this->content, $this->tag);
     }
