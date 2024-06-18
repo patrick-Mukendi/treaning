@@ -8,7 +8,9 @@ include_once 'Select.php';
 include_once 'FileUpload.php';
 include_once 'HTML/Radio.php';
 include_once 'Cookie.php';
+include_once 'Session.php';
 include_once 'HTML/Checkbox.php';
+Session::start();
 
 function addCookie()
 {
@@ -22,6 +24,12 @@ function getCookie() : string
 }
 
 
+
+
+
+$type = isset($_POST["Gest"]) ?? null;
+$name = isset($_POST["username"]) ?? null;
+$mail = isset($_POST["email"]) ?? null;
 
 $form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
 $form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi')); 
