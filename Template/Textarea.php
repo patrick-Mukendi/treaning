@@ -24,7 +24,7 @@ class Textarea extends HTMLElement
     public function  render(): string
     {
         return sprintf(
-            '<textarea name="%s" %s>%s</textarea>', 
+            '<textarea name="%s" %s placeholder="%s" ></textarea>', 
             $this->name, 
             $this->attribut(),
             $this->content);

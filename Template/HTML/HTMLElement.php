@@ -1,6 +1,6 @@
 <?php
 
- class HTMLElement
+abstract class HTMLElement
  {
     private string $tag;
     private array $attributes;
@@ -13,8 +13,6 @@
         $this->content = $content;
     } 
 
-    public function render() : string
-    {
-        return 'Je suis render';
-    }
+abstract public function render() : string;
+    
 }

@@ -11,9 +11,9 @@ class Cookie
     {
         if(isset($_COOKIE[$name]))
         {
-            return 'ID de session ' .$_COOKIE[$name]. 'type User ' .$type;
+            return $_COOKIE[$name];
         }
-        return 'Pas de thème préféré défini';
+        return '';
     }
 
     public static function delete(string $name)

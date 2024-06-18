@@ -8,27 +8,32 @@ include_once 'Select.php';
 include_once 'FileUpload.php';
 include_once 'HTML/Radio.php';
 include_once 'Cookie.php';
+include_once 'HTML/Checkbox.php';
 
 function addCookie()
 {
     isset($_POST['username']) ? Cookie::set('PC1', $_POST['username']) : NULL;
-    echo Cookie::get('PC1', "user");
-    
+  
+}
+
+function getCookie() : string
+{
+   return Cookie::get('PC1', "user");
 }
 
 
 
-$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("Patrick","HTML"), 'method'=>'post']); 
-$form->addElement(new Input('text', 'username', 'JohnDoe')); 
-$form->addElement(new Input('email', 'email')); 
-$form->addElement(new Textarea('comments', 'Write something...', ['class' =>'textarea'])); 
+$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
+$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi')); 
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com')); 
+$form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
 $form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
-$form->addElement(new Radio('gender', 'Homme', false, ['class' => 'radio'])); 
-$form->addElement(new Radio('gender', 'Femme', true, ['class' => 'radio']));
+$form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
+$form->addElement(new Radio('gender', 'Femme', false, ['class' => 'radio']));
+$form->addElement(new Checkbox('subscribe', 'yes', true, ['class' => 'checkbox']));
+$form->addElement(new Checkbox('subscribe', 'no', false, ['class' => 'checkbox']));
 $form->addElement(new Input('file', 'monfichier')); 
 $form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
-
-
 ?>
 
 <html>
@@ -38,7 +43,8 @@ $form->addElement(new Button('button', ['type' => 'submit'], 'Submit'));
   href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
 />
     </head>
-<body>
+<body style="padding-left:400px;padding-right:400px;padding-top:50px">
+    <h1>Bienvenue <?= getCookie()?>!!</h1>
   <?=$form->render(); addCookie(); ?>
   </body>
 </html>
