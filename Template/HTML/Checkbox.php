@@ -1,6 +1,6 @@
-
 <?php
-include_once 'HTMLElement.php';
+namespace App\HTML;
+use App\HTML\HTMLElement;
 
 class Checkbox extends HTMLElement 
 {

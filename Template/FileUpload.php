@@ -1,9 +1,10 @@
 <?php
+namespace App;
 class FileUpload 
 {
     public static function upload(string $name="file", string $target_dir = "" )
     {
-        $info = new SplFileInfo(isset($_FILES["monfichier"]["name"]) ? $_FILES["monfichier"]["name"] : null);
+        $info = new \SplFileInfo(isset($_FILES["monfichier"]["name"]) ? $_FILES["monfichier"]["name"] : null);
         // var_dump($info->getExtension());
 
         $repertoireDestination = dirname(__FILE__)."/".$target_dir."/";

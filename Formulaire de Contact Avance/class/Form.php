@@ -1,6 +1,5 @@
 <?php
-namespace App;
-use App\HTML\HTMLElement;
+require_once 'HTML/HTMLElement.php';
 
 class Form extends  HTMLElement
 {

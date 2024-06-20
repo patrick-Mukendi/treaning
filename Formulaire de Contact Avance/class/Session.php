@@ -1,6 +1,4 @@
 <?php
-namespace App;
-
 class Session
 {
     static function start()
@@ -16,7 +14,8 @@ class Session
     }
 
     static function get(string $type, string $name) : array
-    {   
+    {
+        
         return $session = [$_SESSION[$type],$_SESSION['username'], $_SESSION['mail']];
     }
 }

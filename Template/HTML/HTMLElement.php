@@ -1,5 +1,7 @@
 <?php
 
+namespace App\HTML;
+
 abstract class HTMLElement
  {
     private string $tag;

@@ -1,39 +1,51 @@
 <?php
-include_once 'Form.php';
-include_once 'HTML/Input.php';
-include_once 'HTML/Button.php';
-include_once 'Cookie.php';
-include_once 'Textarea.php';
-include_once 'Select.php';
-include_once 'FileUpload.php';
-include_once 'HTML/Radio.php';
-include_once 'Cookie.php';
-include_once 'Session.php';
-include_once 'HTML/Checkbox.php';
+
+require '../vendor/autoload.php';
+// include_once 'Form.php';
+// include_once 'HTML/Input.php';
+// include_once 'HTML/Button.php';
+// include_once 'Cookie.php';
+// include_once 'Textarea.php';
+// include_once 'Select.php';
+// include_once 'FileUpload.php';
+// include_once 'HTML/Radio.php';
+// include_once 'Cookie.php';
+// include_once 'Session.php';
+// include_once 'HTML/Checkbox.php';
+use App\{
+  Form,
+  Session,
+  Cookie,
+  Select,
+  Textarea,
+  FileUpload,
+};
+
+use App\HTML\{
+  Input,
+  Radio,
+  Checkbox,
+  Button
+};
+
 Session::start();
 
-function addCookie()
-{
-    isset($_POST['username']) ? Cookie::set('PC1', $_POST['username']) : NULL;
-  
-}
+Cookie::set('PC1', $_POST['username']??'');
+$cookie = Cookie::get('PC1', "user");
 
-function getCookie() : string
-{
-   return Cookie::get('PC1', "user");
-}
+$type = isset($_POST["Gest"]) ?? "";
+$name = isset($_POST["username"]) ?? "";
+$mail = isset($_POST["email"]) ?? "";
 
+Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
 
-
-
-
-$type = isset($_POST["Gest"]) ?? null;
-$name = isset($_POST["username"]) ?? null;
-$mail = isset($_POST["email"]) ?? null;
-
+$session = Session::get('Gest','username');
+$username = $session[1];
+$mail =  $session[2];
+ 
 $form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
-$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi')); 
-$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com')); 
+$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi', ['value' => $username])); 
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['value' => $mail])); 
 $form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
 $form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
 $form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
@@ -52,7 +64,8 @@ $form->addElement(new Button('button', ['type' => 'submit'], 'Submit'));
 />
     </head>
 <body style="padding-left:400px;padding-right:400px;padding-top:50px">
-    <h1>Bienvenue <?= getCookie()?>!!</h1>
-  <?=$form->render(); addCookie(); ?>
+ 
+    <h1>Bienvenue <?= $cookie ?>!!</h1>
+  <?=$form->render();?>
   </body>
 </html>

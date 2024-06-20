@@ -1,5 +1,6 @@
 <?php
-require_once 'HTML/HTMLElement.php';
+namespace App;
+use App\HTML\HTMLElement;
 
 class Select extends HTMLElement
 {

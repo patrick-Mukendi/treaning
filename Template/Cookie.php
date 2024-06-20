@@ -1,4 +1,5 @@
 <?php
+namespace App;
 class Cookie
 { 
     public static function set(string $name, string $values, float $time = 3600) 
