@@ -1,5 +1,5 @@
 <?php
-require_once 'HTML/HTMLElement.php';
+use App\HTML\HTMLElement;
 
 class Form extends  HTMLElement
 {

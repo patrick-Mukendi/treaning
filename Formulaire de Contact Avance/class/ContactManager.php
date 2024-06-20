@@ -1,4 +1,11 @@
-index.php : Page principale pour afficher la liste des contacts.
-add.php : Page pour ajouter un nouveau contact.
-edit.php : Page pour mettre à jour un contact.
-delete.php : Page pour supprimer un contact.
+<?php
+/* 
+ * JSON Class 
+ * Cette classe fait du crud operation  (connect, insert, update, and delete)
+ * @author    Patrick Mukendi
+ * @url        http://github 
+ */
+include_once 'FileHandler';
+class ContactManager
+{
+}
