@@ -1,4 +1,5 @@
 <?php 
+namespace Contact\Class;
 /* 
  * JSON Class 
  * Cette classe fait du crud operation  (connect, insert, update, and delete)
@@ -6,7 +7,8 @@
  * @url        http://github 
  */ 
 class FileHandler
-{  private string $jsonFile  =  "json_files/data.json";
+{  
+    private string $jsonFile  =  "json_files/data.json";
     
     /* public function creat()
     {  

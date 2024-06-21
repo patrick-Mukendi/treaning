@@ -1,57 +1,59 @@
 <?php
 /* 
- * JSON Class 
+ * ContactManager 
  * Cette classe fait du crud operation  (connect, insert, update, and delete)
  * @author    Patrick Mukendi
  * @url        http://github 
  */
-include_once 'FileHandler.php';
-include_once 'Contact.php';
+namespace Contact\Class;
+
 class ContactManager
-{ private   $fileHandler; private array $contact;
-    public function __construct ()
+{
+    private   $fileHandler;
+    private array $contact;
+    public function __construct()
     {
         $this->fileHandler = new FileHandler();
-        
     }
 
-    public function readAllData() {
-        
+    public function readAllData()
+    {
         return $this->fileHandler->getRows();;
     }
 
-    public function readSingleData ()
+    public function readSingleData()
     {
         $contact = new Contact();
         return $this->fileHandler->getSingle($contact->getId());
     }
 
-    public function addData ( $name,$email,$phone )
-    { 
-        $contact = new Contact($name,$email,$phone );
-
-        $contacts = ['name'=>$contact->getName(), 
-                     'email'=>$contact->getEmail(), 
-                     'phone'=>$contact->getPhone()];
-
-        return $this->fileHandler->insert($contacts); 
+    public function addData($name, $email, $phone)
+    {
+        $contact = new Contact(null, $name, $email, $phone);
+        $contacts = [
+            'name' => $contact->getName(),
+            'email' => $contact->getEmail(),
+            'phone' => $contact->getPhone()
+        ];
+        return $this->fileHandler->insert($contacts);
     }
 
-    public function updateDate()
+    public function updateDate($id_str, $name, $email, $phone)
     {
-        $contact = new Contact();
+        $contact = new Contact($id_str, $name, $email, $phone);
 
-        $contacts = ['id'=>$contact->getId(), 
-                     'name'=>$contact->getName(), 
-                     'email'=>$contact->getEmail(), 
-                     'phone'=>$contact->getPhone()];
+        $contacts = [
+            'name' => $contact->getName(),
+            'email' => $contact->getEmail(),
+            'phone' => $contact->getPhone()
+        ];
 
-        return $this->fileHandler->update($contacts, $contact->getId()); 
+        return $this->fileHandler->update($contacts, $id_str);
     }
 
-    public function delete ($id)
+    public function delete($id)
     {
         $contact = new Contact();
-        return $this->fileHandler->delete($id); 
+        return $this->fileHandler->delete($id);
     }
 }

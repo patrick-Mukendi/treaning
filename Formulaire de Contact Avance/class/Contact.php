@@ -1,7 +1,9 @@
 <?php
-class Contact 
+namespace Contact\Class;
+
+class Contact
 {
-    public function __construct( private ?string $name = null, private ?string $email = null, private ? string $phone = null, private ?string $id= null)
+    public function __construct(private ?string $id = null, private ?string $name = null, private ?string $email = null, private ?string $phone = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -9,10 +11,10 @@ class Contact
         $this->phone = $phone;
     }
 
-public function getId(): string 
-{
-    return $this->id;
-}
+    public function getId(): string
+    {
+        return $this->id;
+    }
 
     public function getName(): string
     {
@@ -48,6 +50,4 @@ public function getId(): string
     {
         $this->phone = $phone;
     }
-
-	
 }

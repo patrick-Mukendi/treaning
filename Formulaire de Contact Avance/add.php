@@ -1,71 +1,50 @@
 <?php
-
 require '../vendor/autoload.php';
-// include_once 'Form.php';
-// include_once 'HTML/Input.php';
-// include_once 'HTML/Button.php';
-// include_once 'Cookie.php';
-// include_once 'Textarea.php';
-// include_once 'Select.php';
-// include_once 'FileUpload.php';
-// include_once 'HTML/Radio.php';
-// include_once 'Cookie.php';
-// include_once 'Session.php';
-// include_once 'HTML/Checkbox.php';
+
+use Contact\Class\ContactManager;
 use App\{
   Form,
   Session,
   Cookie,
-  Select,
-  Textarea,
-  FileUpload,
 };
-
 use App\HTML\{
   Input,
-  Radio,
-  Checkbox,
   Button
 };
 
 Session::start();
-
-Cookie::set('PC1', $_POST['username']??'');
+Cookie::set('PC1', $_POST['username'] ?? '');
 $cookie = Cookie::get('PC1', "user");
 
-$type = isset($_POST["Gest"]) ?? "";
-$name = isset($_POST["username"]) ?? "";
-$mail = isset($_POST["email"]) ?? "";
+$db = new ContactManager();
+$id = isset($_POST['id']) ? $_POST['id'] : '';
+$name = trim(strip_tags(isset($_POST['name']) ? $_POST['name'] : ''));
+$email = trim(strip_tags(isset($_POST['email']) ? $_POST['email'] : ''));
+$phone = trim(strip_tags(isset($_POST['phone']) ? $_POST['phone'] : ''));
 
-Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
-
-$session = Session::get('Gest','username');
+if (!empty($name)) 
+{
+  $insert = $db->addData($name, $email, $phone);
+}
+Session::set('$_POST["Gest"]', $name, $email);
+$session = Session::get('Gest', 'username');
 $username = $session[1];
 $mail =  $session[2];
- 
-$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
-$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi', ['value' => $username])); 
-$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['value' => $mail])); 
-$form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
-$form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
-$form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
-$form->addElement(new Radio('gender', 'Femme', false, ['class' => 'radio']));
-$form->addElement(new Checkbox('subscribe', 'yes', true, ['class' => 'checkbox']));
-$form->addElement(new Checkbox('subscribe', 'no', false, ['class' => 'checkbox']));
-$form->addElement(new Input('file', 'monfichier')); 
-$form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
+
+$form = new Form(['enctype' => 'multipart/form-data', 'action' => '', 'method' => 'post']);
+$form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi'));
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com'));
+$form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000'));
+$form->addElement(new Button('button', ['type' => 'submit', 'name' => 'submit'], 'Submit'));
 ?>
 
 <html>
-    <head>
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-/>
-    </head>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</head>
 <body style="padding-left:400px;padding-right:400px;padding-top:50px">
- 
-    <h1>Bienvenue <?= $cookie ?>!!</h1>
-  <?=$form->render();?>
-  </body>
+  <h1 >Nouveau Contact</h1>
+  <a href="index.php">Liste Contacts</a>
+  <?= $form->render(); ?>
+</body>
 </html>

@@ -1,17 +1,7 @@
 <?php
 
 require '../vendor/autoload.php';
-// include_once 'Form.php';
-// include_once 'HTML/Input.php';
-// include_once 'HTML/Button.php';
-// include_once 'Cookie.php';
-// include_once 'Textarea.php';
-// include_once 'Select.php';
-// include_once 'FileUpload.php';
-// include_once 'HTML/Radio.php';
-// include_once 'Cookie.php';
-// include_once 'Session.php';
-// include_once 'HTML/Checkbox.php';
+
 use App\{
   Form,
   Session,

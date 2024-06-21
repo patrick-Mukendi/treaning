@@ -9,7 +9,6 @@ class Form extends  HTMLElement
     public function __construct ($attributs = [] )
     {
         $this->attributs= $attributs;
-        
     }
     private function attribut() : string
     {
@@ -47,7 +46,7 @@ class Form extends  HTMLElement
             $element .= $values;
         }
         $element .= '</form>';
-
+        
         return $element;
     }
 }

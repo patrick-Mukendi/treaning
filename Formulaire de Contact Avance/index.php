@@ -1,71 +1,66 @@
 <?php
-
 require '../vendor/autoload.php';
-// include_once 'Form.php';
-// include_once 'HTML/Input.php';
-// include_once 'HTML/Button.php';
-// include_once 'Cookie.php';
-// include_once 'Textarea.php';
-// include_once 'Select.php';
-// include_once 'FileUpload.php';
-// include_once 'HTML/Radio.php';
-// include_once 'Cookie.php';
-// include_once 'Session.php';
-// include_once 'HTML/Checkbox.php';
+use Contact\Class\ContactManager;
 use App\{
-  Form,
-  Session,
-  Cookie,
-  Select,
-  Textarea,
-  FileUpload,
-};
-
-use App\HTML\{
-  Input,
-  Radio,
-  Checkbox,
-  Button
+    Session,
 };
 
 Session::start();
 
-Cookie::set('PC1', $_POST['username']??'');
-$cookie = Cookie::get('PC1', "user");
-
-$type = isset($_POST["Gest"]) ?? "";
-$name = isset($_POST["username"]) ?? "";
-$mail = isset($_POST["email"]) ?? "";
-
-Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
-
-$session = Session::get('Gest','username');
-$username = $session[1];
-$mail =  $session[2];
- 
-$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
-$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi', ['value' => $username])); 
-$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['value' => $mail])); 
-$form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
-$form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
-$form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
-$form->addElement(new Radio('gender', 'Femme', false, ['class' => 'radio']));
-$form->addElement(new Checkbox('subscribe', 'yes', true, ['class' => 'checkbox']));
-$form->addElement(new Checkbox('subscribe', 'no', false, ['class' => 'checkbox']));
-$form->addElement(new Input('file', 'monfichier')); 
-$form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
+$db = new ContactManager();
+$members = $db->readAllData();
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-    <head>
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-/>
-    </head>
-<body style="padding-left:400px;padding-right:400px;padding-top:50px">
- 
-    <h1>Bienvenue <?= $cookie ?>!!</h1>
-  <?=$form->render();?>
-  </body>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Contact</title>
+</head>
+
+<body style="padding-top:50px">
+    <div>
+        <div>
+            <h1>Liste Contact</h1>
+                <a href="add.php" >Nouveau Contact</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Tel</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if (!empty($members)) {
+                    $count = 0;
+                    foreach ($members as $row) {
+                        ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['email']; ?></td>
+                            <td><?php echo $row['phone']; ?></td>
+                            <td>
+                                <a href="edit.php?id=<?php echo $row['id'] ?>">Edit</a>
+                                <a href="delete.php?action_type=delete&id=<?php echo $row['id']; ?>"  onclick="return confirm('Voulez-vous supprimer?');">Delete</a>
+                            </td>
+                        </tr>
+                    <?php }
+                } else { ?>
+                    <tr>
+                        <td colspan="6">Aucun contact...</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
 </html>
