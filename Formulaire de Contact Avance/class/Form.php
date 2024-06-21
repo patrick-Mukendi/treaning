@@ -1,7 +1,8 @@
 <?php
 use App\HTML\HTMLElement;
 
-class Form extends  HTMLElement
+
+class Form 
 {
     private array $attributs;
     private array $content;
