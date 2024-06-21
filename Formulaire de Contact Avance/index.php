@@ -23,7 +23,7 @@ $members = $db->readAllData();
 <body style="padding-top:50px">
     <div>
         <div>
-            <h1>Liste Contact</h1>
+            <h1>Liste Contact</h1> 
                 <a href="add.php" >Nouveau Contact</a>
         </div>
         <table>
