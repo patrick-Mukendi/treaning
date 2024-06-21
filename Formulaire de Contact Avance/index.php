@@ -15,21 +15,23 @@ $members = $db->readAllData();
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
     <title>Formulaire de Contact</title>
 </head>
 
-<body style="padding-top:50px">
+<body style="padding-left:20px;padding-right:20px;padding-top:50px">
     <div>
         <div>
-            <h1>Liste Contact</h1> 
+            <h1 style="color:black">Liste Contact</h1> 
                 <a href="add.php" >Nouveau Contact</a>
         </div>
         <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
+            <thead >
+                <tr >
+                    <th >Id</th>
                     <th>Nom</th>
                     <th>Email</th>
                     <th>Tel</th>
@@ -47,8 +49,8 @@ $members = $db->readAllData();
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['phone']; ?></td>
                             <td>
-                                <a href="edit.php?id=<?php echo $row['id'] ?>">Edit</a>
-                                <a href="delete.php?action_type=delete&id=<?php echo $row['id']; ?>"  onclick="return confirm('Voulez-vous supprimer?');">Delete</a>
+                                <a id="button" href="edit.php?id=<?php echo $row['id'] ?>">Edit</a>
+                                <a id="button" href="delete.php?action_type=delete&id=<?php echo $row['id']; ?>"  onclick="return confirm('Voulez-vous supprimer?');">Delete</a>
                             </td>
                         </tr>
                     <?php }
