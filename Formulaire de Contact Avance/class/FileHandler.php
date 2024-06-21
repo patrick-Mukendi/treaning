@@ -1,8 +1,8 @@
 <?php 
 namespace Contact\Class;
 /* 
- * JSON Class 
- * Cette classe fait du crud operation  (connect, insert, update, and delete)
+ * File Handler 
+ * Cette classe fait les operations sur le fichier Json
  * @author    Patrick Mukendi
  * @url        http://github 
  */ 
