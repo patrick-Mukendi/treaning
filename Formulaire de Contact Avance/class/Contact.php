@@ -45,7 +45,7 @@ class Contact
     {
         $this->email = $email;
     }
-
+    
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
