@@ -6,6 +6,6 @@ $contact = new Contact();
 $db = new ContactManager();
 $contact->setId($_GET['id']);
 $delete = $db->delete($_GET['id']);
-
+ 
 header("Location: index.php"); 
 exit();
