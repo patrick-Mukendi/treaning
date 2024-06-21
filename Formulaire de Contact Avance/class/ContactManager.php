@@ -5,7 +5,7 @@
  * @author    Patrick Mukendi
  * @url        http://github 
  */
-namespace Contact\Class;
+namespace Contact\Class; 
 
 class ContactManager
 {
