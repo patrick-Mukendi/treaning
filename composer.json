@@ -4,7 +4,8 @@
         "psr-4": {
             "App\\": "Template/",
             "App\\HTML\\": "Template/HTML/",
-            "Patrick\\Contactform\\": "src/"
+            "Contact\\Class\\": "Formulaire de Contact Avance/class",
+            "Contact\\": "Formulaire de Contact Avance/"
         }
     },
    

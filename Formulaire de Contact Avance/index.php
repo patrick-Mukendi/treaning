@@ -1,71 +1,71 @@
-<?php 
-// Start session 
-session_start(); 
+<?php
+
+require '../vendor/autoload.php';
+// include_once 'Form.php';
+// include_once 'HTML/Input.php';
+// include_once 'HTML/Button.php';
+// include_once 'Cookie.php';
+// include_once 'Textarea.php';
+// include_once 'Select.php';
+// include_once 'FileUpload.php';
+// include_once 'HTML/Radio.php';
+// include_once 'Cookie.php';
+// include_once 'Session.php';
+// include_once 'HTML/Checkbox.php';
+use App\{
+  Form,
+  Session,
+  Cookie,
+  Select,
+  Textarea,
+  FileUpload,
+};
+
+use App\HTML\{
+  Input,
+  Radio,
+  Checkbox,
+  Button
+};
+
+Session::start();
+
+Cookie::set('PC1', $_POST['username']??'');
+$cookie = Cookie::get('PC1', "user");
+
+$type = isset($_POST["Gest"]) ?? "";
+$name = isset($_POST["username"]) ?? "";
+$mail = isset($_POST["email"]) ?? "";
+
+Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
+
+$session = Session::get('Gest','username');
+$username = $session[1];
+$mail =  $session[2];
  
-// Retrieve session data 
-$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : ''; 
- 
-// Include and initialize JSON class 
-require_once 'class/FileHandler.php'; 
-$db = new FileHandler(); 
- 
-// Fetch the member's data 
-$members = $db->getRows(); 
- 
-// Get status message from session 
-if(!empty($sessData['status']['msg'])){ 
-    $statusMsg = $sessData['status']['msg']; 
-    $statusMsgType = $sessData['status']['type']; 
-    unset($_SESSION['sessData']['status']); 
-} 
+$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
+$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi', ['value' => $username])); 
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['value' => $mail])); 
+$form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
+$form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
+$form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
+$form->addElement(new Radio('gender', 'Femme', false, ['class' => 'radio']));
+$form->addElement(new Checkbox('subscribe', 'yes', true, ['class' => 'checkbox']));
+$form->addElement(new Checkbox('subscribe', 'no', false, ['class' => 'checkbox']));
+$form->addElement(new Input('file', 'monfichier')); 
+$form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
 ?>
 
-<!-- Display status message -->
-<?php if(!empty($statusMsg) && ($statusMsgType == 'success')){ ?>
-<div class="col-xs-12">
-    <div class="alert alert-success"><?php echo $statusMsg; ?></div>
-</div>
-<?php }elseif(!empty($statusMsg) && ($statusMsgType == 'error')){ ?>
-<div class="col-xs-12">
-    <div class="alert alert-danger"><?php echo $statusMsg; ?></div>
-</div>
-<?php } ?>
-
-<div class="row">
-    <div class="col-md-12 head">
-        <h5>Members</h5>
-        <!-- Add link -->
-        <div class="float-right">
-            <a href="edit.php" class="btn btn-success"><i class="plus"></i> New Member</a>
-        </div>
-    </div>
-    
-    <!-- List the users -->
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if(!empty($members)){ $count = 0; foreach($members as $row){ $count++; ?>
-            <tr>
-                <td><?php echo $count; ?></td>
-                <td><?php echo $row['name']; ?></td>
-                <td><?php echo $row['email']; ?></td>
-                <td><?php echo $row['phone']; ?></td>
-                <td>
-                    <a href="addEdit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">edit</a>
-                    <a href="userAction.php?action_type=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete?');">delete</a>
-                </td>
-            </tr>
-            <?php } }else{ ?>
-            <tr><td colspan="6">No member(s) found...</td></tr>
-            <?php } ?>
-        </tbody>
-    </table>
-</div>
+<html>
+    <head>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+/>
+    </head>
+<body style="padding-left:400px;padding-right:400px;padding-top:50px">
+ 
+    <h1>Bienvenue <?= $cookie ?>!!</h1>
+  <?=$form->render();?>
+  </body>
+</html>

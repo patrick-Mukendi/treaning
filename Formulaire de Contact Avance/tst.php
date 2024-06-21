@@ -1,0 +1,381 @@
+<?php 
+// Start session 
+session_start(); 
+ 
+// Include and initialize DB class 
+require_once 'class/ContactManager.php'; 
+//require_once 'class/Contact.php'; 
+
+ 
+// Fetch the member data 
+$db = new ContactManager(); 
+ 
+// Set default redirect url 
+$redirectURL = 'index.php'; 
+ 
+if(isset($_POST['userSubmit'])){ 
+    // Get form fields value 
+    $id = $_POST['id']; 
+    $name = trim(strip_tags($_POST['name'])); 
+    $email = trim(strip_tags($_POST['email'])); 
+    $phone = trim(strip_tags($_POST['phone'])); 
+     $id_str = ''; 
+    if(!empty($id)){ 
+        $id_str = '?id='.$id; 
+    } 
+     
+    
+    // Fields validation 
+    $errorMsg = ''; 
+    if(empty($name)){ 
+        $errorMsg .= '<p>Please enter your name.</p>'; 
+    } 
+    if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)){ 
+        $errorMsg .= '<p>Please enter a valid email.</p>'; 
+    } 
+    if(empty($phone)){ 
+        $errorMsg .= '<p>Please enter contact no.</p>'; 
+    } 
+
+     
+    // Submitted form data
+
+   
+
+     
+   /* $userData = array( 
+        'name' => $name, 
+        'email' => $email, 
+        'phone' => $phone, 
+    ); 
+     */
+    // Store the submitted field value in the session 
+    //$sessData['userData'] = $userData; 
+     
+    // Submit the form data 
+    if(empty($errorMsg)){ 
+        if(!empty($_POST['id'])){ 
+            // Update user data 
+            $update = $db->updateDate($id_str, $name,$email,$phone ); 
+             
+            if($update){ 
+                $sessData['status']['type'] = 'success'; 
+                $sessData['status']['msg'] = 'Member data has been updated successfully.'; 
+                 
+                // Remove submitted fields value from session 
+                unset($sessData['userData']); 
+            }else{ 
+                $sessData['status']['type'] = 'error'; 
+                $sessData['status']['msg'] = 'Some problem occurred, please try again.'; 
+                 
+                // Set redirect url 
+                $redirectURL = 'edit.php'.$id_str; 
+            } 
+        }else{ 
+            // Insert user data 
+            $insert = $db->addData ( $name,$email,$phone ); 
+             
+            if($insert){ 
+                $sessData['status']['type'] = 'success'; 
+                $sessData['status']['msg'] = 'Member data has been added successfully.'; 
+                 
+                // Remove submitted fields value from session 
+                unset($sessData['userData']); 
+            }else{ 
+                $sessData['status']['type'] = 'error'; 
+                $sessData['status']['msg'] = 'Some problem occurred, please try again.'; 
+                 
+                // Set redirect url 
+                $redirectURL = 'edit.php'.$id_str; 
+            } 
+        } 
+    }else{ 
+        $sessData['status']['type'] = 'error'; 
+        $sessData['status']['msg'] = '<p>Please fill all the mandatory fields.</p>'.$errorMsg; 
+         
+        // Set redirect url 
+        $redirectURL = 'edit.php'.$id_str; 
+    } 
+     
+    // Store status into the session 
+    $_SESSION['sessData'] = $sessData; 
+}elseif(($_REQUEST['action_type'] == 'delete') && !empty($_GET['id'])){ 
+    // Delete data 
+    $contact = new Contact();
+    $contact->setId($_GET['id']);
+    $delete = $db->delete($_GET['id']); 
+     
+    if($delete){ 
+        $sessData['status']['type'] = 'success'; 
+        $sessData['status']['msg'] = 'Member data has been deleted successfully.'; 
+    }else{ 
+        $sessData['status']['type'] = 'error'; 
+        $sessData['status']['msg'] = 'Some problem occurred, please try again.'; 
+    } 
+     
+    // Store status into the session 
+    $_SESSION['sessData'] = $sessData; 
+} 
+ 
+// Redirect to the respective page 
+header("Location:".$redirectURL); 
+exit(); 
+?>
+
+
+
+<?php
+// Start session 
+session_start(); 
+ 
+// Retrieve session data 
+$sessData = !empty($_SESSION['sessData'])?$_SESSION['sessData']:''; 
+ 
+// Get member data 
+$memberData = $userData = array(); 
+if(!empty($_GET['id'])){ 
+    // Include and initialize JSON class 
+    require_once 'class/ContactManager.php'; 
+    //require_once 'class/Contact.php'; 
+    $db = new ContactManager(); 
+     
+    // Fetch the member data 
+    $contact = new Contact();
+    $contact->setId($_GET['id']);
+    $memberData = $db->readSingleData(); 
+} 
+$userData = !empty($sessData['userData'])?$sessData['userData']:$memberData; 
+unset($_SESSION['sessData']['userData']); 
+ 
+$actionLabel = !empty($_GET['id'])?'Edit':'Add'; 
+ 
+// Get status message from session 
+if(!empty($sessData['status']['msg'])){ 
+    $statusMsg = $sessData['status']['msg']; 
+    $statusMsgType = $sessData['status']['type']; 
+    unset($_SESSION['sessData']['status']); 
+} 
+?>
+
+<!-- Display status message -->
+<?php if(!empty($statusMsg) && ($statusMsgType == 'success')){ ?>
+<div class="col-xs-12">
+    <div class="alert alert-success"><?php echo $statusMsg; ?></div>
+</div>
+<?php }elseif(!empty($statusMsg) && ($statusMsgType == 'error')){ ?>
+<div class="col-xs-12">
+    <div class="alert alert-danger"><?php echo $statusMsg; ?></div>
+</div>
+<?php } ?>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2><?php echo $actionLabel; ?> Member</h2>
+    </div>
+    <div class="col-md-6">
+         <form method="post" action="delete.php">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter your name" value="<?php echo !empty($userData['name'])?$userData['name']:''; ?>" required="">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter your email" value="<?php echo !empty($userData['email'])?$userData['email']:''; ?>" required="">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" name="phone" placeholder="Enter contact no" value="<?php echo !empty($userData['phone'])?$userData['phone']:''; ?>" required="">
+            </div>
+                      
+            <a href="index.php" class="btn btn-secondary">Back</a>
+            <input type="hidden" name="id" value="<?php echo !empty($memberData['id'])?$memberData['id']:''; ?>">
+            <input type="submit" name="userSubmit" class="btn btn-success" value="Submit">
+        </form>
+    </div>
+</div>
+
+
+<?php 
+// Start session 
+session_start(); 
+ 
+// Retrieve session data 
+$sessData = !empty($_SESSION['sessData']) ? $_SESSION['sessData'] : ''; 
+ 
+// Include and initialize JSON class 
+require_once 'class/ContactManager.php'; 
+//require_once 'class/Contact.php'; 
+$db = new ContactManager(); 
+ 
+// Fetch the member's data 
+$members = $db->readAllData(); 
+ 
+// Get status message from session 
+if(!empty($sessData['status']['msg'])){ 
+    $statusMsg = $sessData['status']['msg']; 
+    $statusMsgType = $sessData['status']['type']; 
+    unset($_SESSION['sessData']['status']); 
+} 
+?>
+
+<!-- Display status message -->
+<?php if(!empty($statusMsg) && ($statusMsgType == 'success')){ ?>
+<div class="col-xs-12">
+    <div class="alert alert-success"><?php echo $statusMsg; ?></div>
+</div>
+<?php }elseif(!empty($statusMsg) && ($statusMsgType == 'error')){ ?>
+<div class="col-xs-12">
+    <div class="alert alert-danger"><?php echo $statusMsg; ?></div>
+</div>
+<?php } ?>
+
+<div class="row">
+    <div class="col-md-12 head">
+        <h5>Members</h5>
+        <!-- Add link -->
+        <div class="float-right">
+            <a href="edit.php" class="btn btn-success"><i class="plus"></i> New Member</a>
+        </div>
+    </div>
+    
+    <!-- List the users -->
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(!empty($members)){ $count = 0; foreach($members as $row){ $count++; ?>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['email']; ?></td>
+                <td><?php echo $row['phone']; ?></td>
+                <td>
+                    <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">edit</a>
+                    <a href="delete.php?action_type=delete&id=<?php echo $row['id']; ?>" class="btn btn-danger" onclick="return confirm('Are you sure to delete?');">delete</a>
+                </td>
+            </tr>
+            <?php } }else{ ?>
+            <tr><td colspan="6">No member(s) found...</td></tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>
+
+//Exemple github aide
+
+<?php
+class FileHandler {
+    private $filename;
+
+    public function __construct($filename) {
+        $this->filename = $filename;
+    }
+
+    public function readData() {
+        if (file_exists($this->filename)) {
+            $data = file_get_contents($this->filename);
+            return unserialize($data);
+        } else {
+            return [];
+        }
+    }
+
+    public function writeData($data) {
+        $serialized_data = serialize($data);
+        file_put_contents($this->filename, $serialized_data);
+    }
+}
+?>
+
+
+<?php
+class Contact {
+    private $name;
+    private $phoneNumber;
+    private $email;
+
+    public function __construct($name, $phoneNumber, $email) {
+        $this->name = $name;
+        $this->phoneNumber = $phoneNumber;
+        $this->email = $email;
+    }
+
+    // Getters
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getPhoneNumber() {
+        return $this->phoneNumber;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+}
+?>
+
+
+<?php
+class ContactManager {
+    private $fileHandler;
+    private $contacts;
+
+    public function __construct($filename) {
+        $this->fileHandler = new FileHandler($filename);
+        $this->contacts = $this->fileHandler->readData();
+    }
+
+    public function addContact($name, $phoneNumber, $email) {
+        $contact = new Contact($name, $phoneNumber, $email);
+        $this->contacts[] = $contact;
+        $this->fileHandler->writeData($this->contacts);
+    }
+
+    public function deleteContact($name) {
+        foreach ($this->contacts as $key => $contact) {
+            if ($contact->getName() === $name) {
+                unset($this->contacts[$key]);
+                $this->fileHandler->writeData($this->contacts);
+                return true;
+            }
+        }
+        return false; // Contact not found
+    }
+
+    public function retrieveContacts() {
+        return $this->contacts;
+    }
+}
+?>
+
+
+<?php
+// Exemple d'utilisation
+
+// Création d'un gestionnaire de contacts avec un fichier de données
+$contactManager = new ContactManager('contacts.dat');
+
+// Ajout de contacts
+$contactManager->addContact('John Doe', '123-456-7890', 'john.doe@example.com');
+$contactManager->addContact('Jane Smith', '456-789-0123', 'jane.smith@example.com');
+
+// Suppression d'un contact
+$contactManager->deleteContact('John Doe');
+
+// Récupération des contacts
+$contacts = $contactManager->retrieveContacts();
+
+// Affichage des contacts
+foreach ($contacts as $contact) {
+    echo "Nom: " . $contact->getName() . ", Téléphone: " . $contact->getPhoneNumber() . ", Email: " . $contact->getEmail() . "<br>";
+}
+?>
+

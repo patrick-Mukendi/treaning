@@ -1,111 +1,71 @@
-//Exemple github aide
-
 <?php
-class FileHandler {
-    private $filename;
 
-    public function __construct($filename) {
-        $this->filename = $filename;
-    }
+require '../vendor/autoload.php';
+// include_once 'Form.php';
+// include_once 'HTML/Input.php';
+// include_once 'HTML/Button.php';
+// include_once 'Cookie.php';
+// include_once 'Textarea.php';
+// include_once 'Select.php';
+// include_once 'FileUpload.php';
+// include_once 'HTML/Radio.php';
+// include_once 'Cookie.php';
+// include_once 'Session.php';
+// include_once 'HTML/Checkbox.php';
+use App\{
+  Form,
+  Session,
+  Cookie,
+  Select,
+  Textarea,
+  FileUpload,
+};
 
-    public function readData() {
-        if (file_exists($this->filename)) {
-            $data = file_get_contents($this->filename);
-            return unserialize($data);
-        } else {
-            return [];
-        }
-    }
+use App\HTML\{
+  Input,
+  Radio,
+  Checkbox,
+  Button
+};
 
-    public function writeData($data) {
-        $serialized_data = serialize($data);
-        file_put_contents($this->filename, $serialized_data);
-    }
-}
+Session::start();
+
+Cookie::set('PC1', $_POST['username']??'');
+$cookie = Cookie::get('PC1', "user");
+
+$type = isset($_POST["Gest"]) ?? "";
+$name = isset($_POST["username"]) ?? "";
+$mail = isset($_POST["email"]) ?? "";
+
+Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
+
+$session = Session::get('Gest','username');
+$username = $session[1];
+$mail =  $session[2];
+ 
+$form = new Form(['enctype'=>'multipart/form-data', 'action'=>FileUpload::upload("file","filesUpload"), 'method'=>'post']); 
+$form->addElement(new Input('text', 'username', 'Ex:Patrick Mukendi', ['value' => $username])); 
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['value' => $mail])); 
+$form->addElement(new Textarea('comments', 'Ex:Write something...', ['class' =>'textarea'])); 
+$form->addElement(new Select('country', ['us' => 'USA', 'ca' => 'Canada'], ['class' =>'dropdown']));
+$form->addElement(new Radio('gender', 'Homme', true, ['class' => 'radio'])); 
+$form->addElement(new Radio('gender', 'Femme', false, ['class' => 'radio']));
+$form->addElement(new Checkbox('subscribe', 'yes', true, ['class' => 'checkbox']));
+$form->addElement(new Checkbox('subscribe', 'no', false, ['class' => 'checkbox']));
+$form->addElement(new Input('file', 'monfichier')); 
+$form->addElement(new Button('button', ['type' => 'submit'], 'Submit')); 
 ?>
 
-
-<?php
-class Contact {
-    private $name;
-    private $phoneNumber;
-    private $email;
-
-    public function __construct($name, $phoneNumber, $email) {
-        $this->name = $name;
-        $this->phoneNumber = $phoneNumber;
-        $this->email = $email;
-    }
-
-    // Getters
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getPhoneNumber() {
-        return $this->phoneNumber;
-    }
-
-    public function getEmail() {
-        return $this->email;
-    }
-}
-?>
-
-
-<?php
-class ContactManager {
-    private $fileHandler;
-    private $contacts;
-
-    public function __construct($filename) {
-        $this->fileHandler = new FileHandler($filename);
-        $this->contacts = $this->fileHandler->readData();
-    }
-
-    public function addContact($name, $phoneNumber, $email) {
-        $contact = new Contact($name, $phoneNumber, $email);
-        $this->contacts[] = $contact;
-        $this->fileHandler->writeData($this->contacts);
-    }
-
-    public function deleteContact($name) {
-        foreach ($this->contacts as $key => $contact) {
-            if ($contact->getName() === $name) {
-                unset($this->contacts[$key]);
-                $this->fileHandler->writeData($this->contacts);
-                return true;
-            }
-        }
-        return false; // Contact not found
-    }
-
-    public function retrieveContacts() {
-        return $this->contacts;
-    }
-}
-?>
-
-
-<?php
-// Exemple d'utilisation
-
-// Création d'un gestionnaire de contacts avec un fichier de données
-$contactManager = new ContactManager('contacts.dat');
-
-// Ajout de contacts
-$contactManager->addContact('John Doe', '123-456-7890', 'john.doe@example.com');
-$contactManager->addContact('Jane Smith', '456-789-0123', 'jane.smith@example.com');
-
-// Suppression d'un contact
-$contactManager->deleteContact('John Doe');
-
-// Récupération des contacts
-$contacts = $contactManager->retrieveContacts();
-
-// Affichage des contacts
-foreach ($contacts as $contact) {
-    echo "Nom: " . $contact->getName() . ", Téléphone: " . $contact->getPhoneNumber() . ", Email: " . $contact->getEmail() . "<br>";
-}
-?>
-
+<html>
+    <head>
+    <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+/>
+    </head>
+<body style="padding-left:400px;padding-right:400px;padding-top:50px">
+ 
+    <h1>Bienvenue <?= $cookie ?>!!</h1>
+  <?=$form->render();?>
+  </body>
+</html>

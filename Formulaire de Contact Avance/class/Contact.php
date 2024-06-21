@@ -1,7 +1,7 @@
 <?php
 class Contact 
 {
-    public function __construct(private string $id, private string $name, private string $email, private string $phone)
+    public function __construct( private ?string $name = null, private ?string $email = null, private ? string $phone = null, private ?string $id= null)
     {
         $this->id = $id;
         $this->name = $name;

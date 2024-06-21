@@ -7,7 +7,8 @@
  */ 
 class FileHandler
 {  private string $jsonFile  =  "json_files/data.json";
-     public static function creat()
+    
+    /* public function creat()
     {  
         $destinationFile = "json_files";
         $nameFile = "data.json";
@@ -16,19 +17,18 @@ class FileHandler
 
         return $open;
     }
-
+    */
     public function getRows(): bool | array
     {
-        if (FileHandler::creat()) {
+        if ( file_exists ( $this -> jsonFile )) {
             $jsonData = file_get_contents($this->jsonFile);
             $data = json_decode($jsonData, true);
 
             if (!empty($data)) {
-                usort($data, function ($a, $b) {
+                usort($data, function ($b, $a) {
                     return $b['id'] - $a['id'];
                 });
             }
-
             return !empty($data) ? $data : false;
         }
         return false;
@@ -49,15 +49,18 @@ class FileHandler
     public function insert(array $newData): bool
     {
         if (!empty($newData)) {
-            $id = time();
-            $newData['id'] = $id;
+            $id = 1;
+         
             $jsonData = file_get_contents($this->jsonFile);
             $data = json_decode($jsonData, true);
             $data = !empty($data) ? array_filter($data) : $data;
 
             if (!empty($data)) {
+                $id = count($data) + 1;
+                $newData['id'] = $id;
                 array_push($data, $newData);
             } else {
+                $newData['id'] = $id;
                 $data[] = $newData;
             }
             $insert = file_put_contents($this->jsonFile, json_encode($data));
