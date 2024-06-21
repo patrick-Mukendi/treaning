@@ -42,7 +42,7 @@ $form->addElement(new Button('button', ['type' => 'submit', 'name' => 'submit'],
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 </head>
-<body style="padding-left:400px;padding-right:400px;padding-top:50px">
+<body style="padding-left:400px;padding-right:400px;padding-top:50px"> 
   <h1 >Nouveau Contact</h1>
   <a href="index.php">Liste Contacts</a>
   <?= $form->render(); ?>
