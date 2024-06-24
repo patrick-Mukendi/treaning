@@ -25,7 +25,7 @@ class Input extends HTMLElement
 
     public function render(): string
     {
-        return sprintf('<input type="%s" name="%s" placeHolder="%s" %s>', $this->type, $this->name, $this->placeHolder, $this->attribut());
+        return sprintf('<div class="row"><input type="%s" name="%s" placeHolder="%s" %s></div>', $this->type, $this->name, $this->placeHolder, $this->attribut());
     }
 }
 

@@ -1,29 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap');
+body{
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:50px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+justify-content: center;
+
+}
+#border{
+   width: 90nv;
+   
+   
+   color: rgb(91, 91, 91);
+   width: 90%;
+   border-radius: 50px;
+   padding:20xp;
+
+   
+   width: 90%;
+   border: 15px solid rgb(91, 91, 91);
+   padding: 50px;
+   margin: 20px;
+ }
+ .Button{
+   position: absolute;
+   width: 60%;
+   border: 60px solid rgb(202, 59, 59);
+   background: red;
+   padding:10%;
+   filter: blur(9em);
+   border-radius: 50px;
+ }
+ #corps{
+   position: relative;
+   width: 100%;
+   padding:20xp;
+ }
+
+ #blur{
+   position: absolute;
+   width: 60%;
+   border: 60px solid rgb(202, 59, 59);
+   background: red;
+   padding:10%;
+   filter: blur(9em);
+   border-radius: 50px;
+  
+   
+   
+     
+ }
+
 th,tr{
-    background: #2459f7
+   background-color: rgb(248, 244, 244);
+    color: rgb(91, 91, 91);
+    font-weight: 200;
+    font-size: 3vh; 
+
+    
+}
+.tr #action{
+   background-color: rgb(91, 91, 91);
+    color: aliceblue;
+    font-weight: 200;
+    font-size: 3vh; 
+}
+#Id {
+   color: rgb(91, 91, 91);
+   font-weight: 200;
 }
 
 h1, h2,h3,h4, h5, a
 {
-   font-size: 5vh; 
+   font-size: 7vh; 
    text-align: center;
-   border-radius: 50px;
+  
+   color: rgb(91, 91, 91);
+   font-weight: 200;
+   
 }
 
-a
-{
-   font-size: 3vh; 
+
+#btnListeContact {
+   font-size: 2vh; 
    color: aliceblue;
    text-align: center;
-   background-color: rgb(1, 1, 57);
+   background-color:  rgb(202, 59, 59);
+   border-color:  rgb(202, 59, 59);
    padding: 1%;
+   margin-bottom: 2%;
+   border-radius: 50px;
+   font-weight: 200;
+   
+}
+.row{
+   
+   height: 50px;
+   font-size: 2vh;
+   margin:20px;
+   border-radius: 10px;  
 }
 
-td #button
-{
-   font-size: 3vh; 
+#btnListeContact1 {
+   font-size: 2vh; 
    color: aliceblue;
    text-align: center;
-   background-color: blue;
-   padding-left: 5%;
-   padding-right: 5%;
+   background-color:  rgb(202, 59, 59);
+   border-color:  rgb(202, 59, 59);
+   padding: 1%;
+   margin-bottom: 2%;
+   border-radius: 20px;
+   font-weight: 200; 
+   
+   width: 200px;
+   max-width: 500px;
+   height: 60px;
+
+   position:center;
 }
+#btnListeContact:hover {
+      background-color: rgb(202, 59, 59);
+      transform: scale(1.07);
+  }
+
+#button
+{
+   text-align: center;
+   fill-opacity: initial;
+   background-color: rgba(0, 0, 0, 0);
+   border-color: rgba(0, 0, 0, 0);
+}
+
+.material-icons{
+   font-size:25px;
+   color:write;
+}
+
+hr{
+   display: block; /*pour être sûr que les navigateurs vont bien l'afficher en block*/
+   height: 0;
+   border: none; /*on écrase le style par défaut de hr qui a des bordures moches...*/
+   border-top: 1px dashed 
+ rgb(88, 2, 2);
+   background-color: 
+ transparent; /*optionnel mais c'est plus propre*/
+ }
+
+ .form{
+   justify-content: center;
+ }
