@@ -48,14 +48,14 @@ $members = $db->readAllData();
                     foreach ($members as $row) {
                         ?>
                         <tr>
-                            <td id="Id"><?php echo $row['id']; ?></td>
+                            <td id="Id"><?php echo $row['id']; ?><hr></td>
                             <td><?php echo $row['name']; ?> <hr></td>
                             <td><?php echo $row['email']; ?> <hr></td>
                             <td><?php echo $row['phone']; ?> <hr></td>
                             <td id="action">
                                 <a id="button" type="button" href="edit.php?id=<?php echo $row['id'] ?>"><i class="material-icons">edit</i></a>
                                 <a id="button" type="button" href="delete.php?action_type=delete&id=<?php echo $row['id']; ?>"  onclick="return confirm('Voulez-vous supprimer?');"> <i class="material-icons">delete</i></a>
-                            </td>
+                                </td>
                            
                         </tr>
                     <?php }
