@@ -15,5 +15,7 @@
             "email": "mdipatrick5@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpstan/phpstan": "^1.11"
+    }
 }
