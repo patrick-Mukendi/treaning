@@ -22,7 +22,7 @@ class Form extends  HTMLElement
         return $attributs;
     }
 
-    public function addElement(self $element): void
+    public function addElement($element): void
     {
         $elements = $element;
         $this->content[] =  $elements->render();
