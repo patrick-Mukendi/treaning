@@ -4,11 +4,7 @@ use App\HTML\HTMLElement;
 
 class Select extends HTMLElement
 {
-    private string $name;
-    private array $options;
-    private array $attributs;
-
-    public function __construct( $name,  $options = [],  $attributs = [])
+    public function __construct(private string $name,  private array $options = [],  private array $attributs = [])
     {
         $this->name = $name;
         $this->options = $options;

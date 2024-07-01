@@ -9,25 +9,25 @@ namespace Contact\Class;
 
 class ContactManager
 {
-    private   $fileHandler;
-    private array $contact;
+    private  FileHandler $fileHandler;
+
     public function __construct()
     {
         $this->fileHandler = new FileHandler();
     }
 
-    public function readAllData()
+    public function readAllData(): array | bool
     {
         return $this->fileHandler->getRows();;
     }
 
-    public function readSingleData()
+    public function readSingleData(): array | bool
     {
         $contact = new Contact();
         return $this->fileHandler->getSingle($contact->getId());
     }
 
-    public function addData($name, $email, $phone)
+    public function addData(string $name, string $email, string $phone): bool
     {
         $contact = new Contact(null, $name, $email, $phone);
         $contacts = [
@@ -38,7 +38,7 @@ class ContactManager
         return $this->fileHandler->insert($contacts);
     }
 
-    public function updateDate($id_str, $name, $email, $phone)
+    public function updateDate(int $id_str, string $name, string $email, string $phone): bool
     {
         $contact = new Contact($id_str, $name, $email, $phone);
 
@@ -51,9 +51,8 @@ class ContactManager
         return $this->fileHandler->update($contacts, $id_str);
     }
 
-    public function delete($id)
+    public function delete(int $id): bool
     {
-        $contact = new Contact();
         return $this->fileHandler->delete($id);
     }
 }

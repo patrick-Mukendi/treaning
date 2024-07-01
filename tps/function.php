@@ -1,11 +1,11 @@
 <?php
-function is_prime (int|float $nombre):bool
+function is_prime(int | float $nombre): bool
 {
     $verification = 0;
-    for($i = 1; $i <= $nombre; $i++)
+    
+    for ($i = 1; $i <= $nombre; $i++) 
     {
-        if($nombre % $i == 0)
-        {
+        if ($nombre % $i == 0) {
             $verification++;
         }
     }
@@ -13,76 +13,77 @@ function is_prime (int|float $nombre):bool
     return $verification == 2;
 }
 
-function fibonacci(int $nombre):int
+function fibonacci(int $nombre): int
 {
     $fibo = 0;
-    for($i = 0; $i <= $nombre; $i++)
+
+    for ($i = 0; $i <= $nombre; $i++) 
     {
         $fibo += $i;
     }
     return $fibo;
 }
 
-function array_sum1(array $tableau):int
+function array_sum1(array $tableau): int
 {
     $arraySum = 0;
-    foreach($tableau as $valeur)
+
+    foreach ($tableau as $valeur) 
     {
         $arraySum += $valeur;
     }
     return $arraySum;
 }
 
-function count_words(string $chaine):int 
+function count_words(string $chaine): int
 {
     $nombreChaine = 0;
-    if($chaine != "")
-    {
-        $nombreChaine = 1;   
-    }  
 
-    for($i = 0; $i < strlen($chaine); $i++)
+    if ($chaine != "") {
+        $nombreChaine = 1;
+    }
+
+    for ($i = 0; $i < strlen($chaine); $i++) 
     {
-        if($chaine[$i] == "" || $chaine[$i] == ",")
+        if ($chaine[$i] == "" || $chaine[$i] == ",") 
         {
             $nombreChaine++;
         }
     }
-    return  $nombreChaine;
+    return $nombreChaine;
 }
 
-function remove_duplicates(array $arrayDuplicates):array
+function remove_duplicates(array $arrayDuplicates): array
 {
-    $newTableau=[$arrayDuplicates[0]];
+    $newTableau = [$arrayDuplicates[0]];
     $increment = 1;
 
-    foreach($arrayDuplicates as  $val)
+    foreach ($arrayDuplicates as $val) 
     {
         $isval = 1;
-        foreach($newTableau as $value)
+
+        foreach ($newTableau as $value) 
         {
-            if($value == $val)
-            {
+            if ($value == $val) {
                 $isval = 0;
-            } 
+            }
         }
 
-        if($isval == 1)
-        {
+        if ($isval == 1) {
             $newTableau[$increment] = $val;
             $increment += 1;
         }
-
     }
     return $newTableau;
 }
 
-function max_in_array (array $tableau):int
+function max_in_array(array $tableau): int
 {
     $valeurMax = 0;
-    foreach($tableau as $valeur)
+
+    foreach ($tableau as $valeur) 
     {
-        if($valeur > $valeurMax)
+        if ($valeur > $valeurMax) 
         {
             $valeurMax = $valeur;
         }
@@ -90,37 +91,39 @@ function max_in_array (array $tableau):int
     return $valeurMax;
 }
 
-
 function merge_arrays(array $tableau1, array $tableau2): array
 {
     $incrementation = 0;
     $newArray = [];
-    foreach($tableau1 as $valeur)
+
+    foreach ($tableau1 as $valeur) 
     {
         $newArray[$incrementation] = $valeur;
         $incrementation++;
     }
 
-    foreach($tableau2 as $valeur)
+    foreach ($tableau2 as $valeur) 
     {
         $newArray[$incrementation] = $valeur;
         $incrementation++;
     }
 
-    $tableauNoDoublon = [ $newArray[0]];
+    $tableauNoDoublon = [$newArray[0]];
     $incrementation = 1;
-    foreach($newArray as $valeur)
+
+    foreach ($newArray as $valeur) 
     {
         $isval = 1;
-        foreach($tableauNoDoublon as $value)
+
+        foreach ($tableauNoDoublon as $value) 
         {
-            if($value==$valeur)
+            if ($value == $valeur) 
             {
                 $isval = 0;
             }
         }
 
-        if($isval == 1)
+        if ($isval == 1) 
         {
             $tableauNoDoublon[$incrementation] = $valeur;
             $incrementation++;
@@ -129,30 +132,32 @@ function merge_arrays(array $tableau1, array $tableau2): array
     return $tableauNoDoublon;
 }
 
-function reverse_string(string $chaine):string
+function reverse_string(string $chaine): string
 {
-    $chaineSortie="";
-    for($i = strlen($chaine) - 1 ; $i >= 0 ; $i--)
+    $chaineSortie = "";
+
+    for ($i = strlen($chaine) - 1; $i >= 0; $i--) 
     {
         $chaineSortie .= $chaine[$i];
     }
-    return $chaineSortie;  
+    return $chaineSortie;
 }
 
-function count_vowels(string $chaine):int
+function count_vowels(string $chaine): int
 {
     $voyelles = 0;
-    for($i = 0; $i < strlen($chaine); $i++)
+
+    for ($i = 0; $i < strlen($chaine); $i++) 
     {
-        if($chaine[$i] == "a" || $chaine[$i]=="e" || $chaine[$i]=="i" || $chaine[$i]=="u" || $chaine[$i]=="y" || 
-           $chaine[$i] == "o" || $chaine[$i]=="y")
+        if ($chaine[$i] == "a" || $chaine[$i] == "e" || $chaine[$i] == "i" || $chaine[$i] == "u" || $chaine[$i] == "y" ||
+            $chaine[$i] == "o" || $chaine[$i] == "y") 
         {
             $voyelles++;
         }
     }
     return $voyelles;
 }
-function power(int $base, $exposant):int
+function power(int $base, int $exposant): int
 {
     return $base ** $exposant;
 }

@@ -1,18 +1,19 @@
 <?php
 $devise = $_POST['type'] ?? NULL;
-$amount = isset($_POST['amount']) ? (float)$_POST['amount'] : NULL;
-$taux = isset($_POST['taux']) ? (float)$_POST['taux'] : NULL;
+$amount = isset($_POST['amount']) ? (float)$_POST['amount'] : 0;
+$taux = isset($_POST['taux']) ? (float)$_POST['taux'] : 0;
 
-function convertisseur(string $devise, float $amount,$taux):float|string
+function convertisseur(string $devise, float $amount, float $taux): string
 {
-    return match ($devise) {
+    return match ($devise) 
+    {
         'fctousd' => $taux > 0 ? $amount / $taux." usd":"Erreur, Taux doit etre superieur à 0",
         'usdtofc' => $taux > 0 ? $amount * $taux." fc":"Erreur, Taux doit etre superieur à 0",
-        default => 0
+        default => "0"
     };
 }
 
-if(! empty($_POST))
+if(!empty($_POST))
 {
     $convertion = convertisseur($devise, $amount, $taux);
 }

@@ -11,7 +11,7 @@ class Button extends HTMLElement
         $this->content = $content;
     }
     
-    private function attribut()
+    private function attribut(): string
     {
         $attributs = '';
     

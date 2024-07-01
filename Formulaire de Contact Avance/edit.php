@@ -43,7 +43,7 @@ $username = $session[1];
 $mail =  $session[2];
 
 $form = new Form(['enctype' => 'multipart/form-data','class'=>'form', 'action' => '', 'method' => 'post','id'=>'border']);
-$form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi',['required']));
+$form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi', ['required']));
 $form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com',['required']));
 $form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000',['required']));
 $form->addElement(new Button('button', ['id'=>"btnListeContact1",'type' => 'submit', 'name' => 'submit'], 'Submit'));

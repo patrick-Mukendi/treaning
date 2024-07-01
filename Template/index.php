@@ -20,16 +20,16 @@ use App\HTML\{
 
 Session::start();
 
-Cookie::set('PC1', $_POST['username']??'');
+Cookie::set('PC1', $_POST['username'] ?? '');
 $cookie = Cookie::get('PC1', "user");
 
-$type = isset($_POST["Gest"]) ?? "";
-$name = isset($_POST["username"]) ?? "";
-$mail = isset($_POST["email"]) ?? "";
+$type = isset($_POST["Gest"]) ? $_POST["Gest"] : "";
+$name = isset($_POST["username"]) ? $_POST["username"] : "";
+$mail = isset($_POST["email"]) ? $_POST["email"] : "";
 
-Session::set('$_POST["Gest"]',$_POST["username"],$_POST["email"]);
+Session::set('$_POST["Gest"]', $_POST["username"], $_POST["email"]);
 
-$session = Session::get('Gest','username');
+$session = Session::get('Gest', 'username');
 $username = $session[1];
 $mail =  $session[2];
  

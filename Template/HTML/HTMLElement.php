@@ -3,18 +3,6 @@
 namespace App\HTML;
 
 abstract class HTMLElement
- {
-    private string $tag;
-    private array $attributes;
-    private string $content;
-
-    public function __construct($tag, $attributs = [], $content = '')
-    {
-        $this->tag = $tag;
-        $this->attributs = $attributs;
-        $this->content = $content;
-    } 
-
-abstract public function render() : string;
-    
+{
+    abstract public function render() : string;
 }

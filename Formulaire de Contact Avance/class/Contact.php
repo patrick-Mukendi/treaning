@@ -11,22 +11,22 @@ class Contact
         $this->phone = $phone;
     }
 
-    public function getId(): string
+    public function getId(): string | null
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public function getName(): string | null
     {
         return $this->name;
     }
 
-    public function getEmail(): string
+    public function getEmail(): string | null
     {
         return $this->email;
     }
 
-    public function getPhone(): string
+    public function getPhone(): string | null
     {
         return $this->phone;
     }

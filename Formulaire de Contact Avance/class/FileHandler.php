@@ -22,12 +22,14 @@ class FileHandler
     */
     public function getRows(): bool | array
     {
-        if ( file_exists ( $this -> jsonFile )) {
-            $jsonData = file_get_contents($this->jsonFile);
-            $data = json_decode($jsonData, true);
+        if ( file_exists ($this -> jsonFile) && !empty($this -> jsonFile)) 
+        {
+            $data = json_decode(file_get_contents($this->jsonFile), true);
 
-            if (!empty($data)) {
-                usort($data, function ($b, $a) {
+            if (!empty($data)) 
+            {
+                usort($data, function ($b, $a) 
+                {
                     return $b['id'] - $a['id'];
                 });
             }
@@ -36,14 +38,18 @@ class FileHandler
         return false;
     }
 
-    public function getSingle(string $id): array | bool
+    public function getSingle(string $id): string | null
     {
         $jsonData = file_get_contents($this->jsonFile);
         $data = json_decode($jsonData, true);
 
-        $singleData = array_filter($data, function ($var) use ($id) {
+        $singleData = array_filter(
+        $data, function ($var) use ($id) 
+        {
             return (!empty($var['id']) && $var['id'] == $id);
-        });
+        }
+        );
+
         $singleData = array_values($singleData)[0];
         return !empty($singleData) ? $singleData : false;
     }
@@ -96,7 +102,7 @@ class FileHandler
         return false;
     }
 
-    public function delete($id)
+    public function delete(int $id)
     {
         $jsonData = file_get_contents($this->jsonFile);
         $data = json_decode($jsonData, true);

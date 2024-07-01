@@ -5,7 +5,7 @@ class Application
 {
     use Logger;
 
-    public function getUser(string $user)
+    public function getUser(string $user): void
     {
         $this->log($user);
     }
