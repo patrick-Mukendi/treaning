@@ -1,8 +1,9 @@
 <?php
+
 class Circle
 {
     private float $rayon;
-    const PI = 3.14;
+    public const PI = 3.14;
 
     public function __construct(float $rayon)
     {

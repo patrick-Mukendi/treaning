@@ -1,4 +1,5 @@
 <?php
+
 class Person
 {
     protected string $name;

@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "ihsandev.scrcpy2",
-        "muuvmuuv.vscode-just-php-cs-fixer"
+        "mansoorkhan96.php-cs-fixer",
+        "higoka.php-cs-fixer"
     ]
 }

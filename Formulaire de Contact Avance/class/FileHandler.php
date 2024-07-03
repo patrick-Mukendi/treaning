@@ -1,116 +1,127 @@
-<?php 
+<?php
+
 namespace Contact\Class;
-/* 
- * File Handler 
+
+/*
+ * File Handler
  * Cette classe fait les operations sur le fichier Json
  * @author    Patrick Mukendi
- * @url        http://github 
- */ 
+ * @url        http://github
+ */
 class FileHandler
-{  
-    private string $jsonFile  =  "json_files/data.json";
-    
-    /* public function creat()
-    {  
-        $destinationFile = "json_files";
-        $nameFile = "data.json";
-        $open = fopen('../'.$destinationFile.$nameFile,'w+');
-        fclose($open);
+{
+    private string $jsonFile = 'json_files/data.json';
 
-        return $open;
-    }
-    */
-    public function getRows(): bool | array
+    public function getRows(): bool|array
     {
-        if ( file_exists ($this -> jsonFile) && !empty($this -> jsonFile)) 
-        {
-            $data = json_decode(file_get_contents($this->jsonFile), true);
+        if (file_exists($this->jsonFile)) {
+            $jsonData = file_get_contents($this->jsonFile);
+            $data = $jsonData ? (array) json_decode($jsonData, true) : '';
 
-            if (!empty($data)) 
-            {
-                usort($data, function ($b, $a) 
-                {
+            if (!empty($data) && is_array($data)) {
+                usort($data, function ($b, $a) {
                     return $b['id'] - $a['id'];
                 });
             }
-            return !empty($data) ? $data : false;
+
+            return !empty($data) ? (array) $data : false;
         }
+
         return false;
     }
 
-    public function getSingle(string $id): string | null
+    public function getSingle(int $id): array|bool
     {
         $jsonData = file_get_contents($this->jsonFile);
-        $data = json_decode($jsonData, true);
+        $data = $jsonData ? json_decode($jsonData, true) : false;
 
-        $singleData = array_filter(
-        $data, function ($var) use ($id) 
-        {
-            return (!empty($var['id']) && $var['id'] == $id);
+        if (is_array($data)) {
+            $singleData = array_filter($data, function ($var) use ($id) {
+                return is_array($var) ? (!empty($var['id']) && $var['id'] == $id) : false;
+            });
+            $newSingleData = array_values($singleData)[0];
+
+            return $newSingleData;
         }
-        );
 
-        $singleData = array_values($singleData)[0];
-        return !empty($singleData) ? $singleData : false;
+        return false;
     }
 
-    public function insert(array $newData): bool
+    public function insert(array $newData): int|bool
     {
         if (!empty($newData)) {
-            $id = 1;
-         
-            $jsonData = file_get_contents($this->jsonFile);
-            $data = json_decode($jsonData, true);
-            $data = !empty($data) ? array_filter($data) : $data;
+            $id = 0;
+            $jsonData = (string) file_get_contents($this->jsonFile);
+            $data1 = json_decode($jsonData, true) ? (array) json_decode($jsonData, true) : '';
+            $data = !empty($data1) ? array_filter($data1) : $data1;
 
-            if (!empty($data)) {
+            if (!empty($data) && is_array($data)) {
                 $id = count($data) + 1;
                 $newData['id'] = $id;
                 array_push($data, $newData);
             } else {
                 $newData['id'] = $id;
-                $data[] = $newData;
+                $data = is_array($data) ? $newData : $data;
             }
             $insert = file_put_contents($this->jsonFile, json_encode($data));
+
             return $insert ? $id : false;
         }
+
         return false;
     }
 
-    public function update(array $upData, string $id)
+    public function update(array $upData, int $id): bool
     {
+        $Newdata = [];
         if (!empty($upData) && is_array($upData) && !empty($id)) {
             $jsonData = file_get_contents($this->jsonFile);
-            $data = json_decode($jsonData, true);
+            $data = $jsonData ? json_decode($jsonData, true) : '';
 
-            foreach ($data as $key => $value) {
-                if ($value['id'] == $id) {
-                    if (isset($upData['name'])) {
-                        $data[$key]['name'] = $upData['name'];
-                    }
-                    if (isset($upData['email'])) {
-                        $data[$key]['email'] = $upData['email'];
-                    }
-                    if (isset($upData['phone'])) {
-                        $data[$key]['phone'] = $upData['phone'];
-                    }
-                }
+            if (!empty($data)) {
+                $Newdata = $this->setUpdate((array) $data, $upData, $id);
             }
-            $update = file_put_contents($this->jsonFile, json_encode($data));
+
+            $update = file_put_contents($this->jsonFile, json_encode($Newdata));
+
             return $update ? true : false;
         }
+
         return false;
     }
 
-    public function delete(int $id)
+    private function setUpdate(array $data, array $upData, int $id): array
+    {
+        foreach ($data as $key => $value) {
+            if ($value['id'] == $id) {
+                if (isset($upData['name'])) {
+                    $data[$key]['name'] = $upData['name'];
+                }
+                if (isset($upData['email'])) {
+                    $data[$key]['email'] = $upData['email'];
+                }
+                if (isset($upData['phone'])) {
+                    $data[$key]['phone'] = $upData['phone'];
+                }
+            }
+        }
+
+        return (array) $data;
+    }
+
+    public function delete(int $id): bool
     {
         $jsonData = file_get_contents($this->jsonFile);
-        $data = json_decode($jsonData, true);
+        $data = $jsonData ? json_decode($jsonData, true) : '';
 
-        $newData = array_filter($data, function ($var) use ($id) {
-            return ($var['id'] != $id);
-        });
-        $delete = file_put_contents($this->jsonFile, json_encode($newData));
-        return $delete ? true : false;
+        if (is_array($data)) {
+            $newData = array_filter($data, function ($var) use ($id) {
+                return $var['id'] != $id;
+            });
+
+            return file_put_contents($this->jsonFile, json_encode($newData)) ? true : false;
+        }
+
+        return false;
     }
 }

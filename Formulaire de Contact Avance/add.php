@@ -1,20 +1,17 @@
 <?php
+
 require '../vendor/autoload.php';
 
+use App\Cookie;
+use App\Form;
+use App\HTML\Button;
+use App\HTML\Input;
+use App\Session;
 use Contact\Class\ContactManager;
-use App\{
-  Form,
-  Session,
-  Cookie,
-};
-use App\HTML\{
-  Input,
-  Button
-};
 
 Session::start();
 Cookie::set('PC1', $_POST['username'] ?? '');
-$cookie = Cookie::get('PC1', "user");
+$cookie = Cookie::get('PC1', 'user');
 
 $db = new ContactManager();
 $id = isset($_POST['id']) ? $_POST['id'] : '';
@@ -22,21 +19,21 @@ $name = trim(strip_tags(isset($_POST['name']) ? $_POST['name'] : ''));
 $email = trim(strip_tags(isset($_POST['email']) ? $_POST['email'] : ''));
 $phone = trim(strip_tags(isset($_POST['phone']) ? $_POST['phone'] : ''));
 
-if (!empty($name)) 
-{
-  $insert = $db->addData($name, $email, $phone);
+if (!empty($name)) {
+    $insert = $db->addData($name, $email, $phone);
 }
 Session::set('$_POST["Gest"]', $name, $email);
 $session = Session::get('Gest', 'username');
 $username = $session[1];
-$mail =  $session[2];
+$mail = $session[2];
 
-$form = new Form(['enctype' => 'multipart/form-data','class'=>'form', 'action' => '', 'method' => 'post','id'=>'border']);
-$form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi',['required']));
-$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com',['required']));
-$form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000',['required']));
-$form->addElement(new Button('button', ['id'=>"btnListeContact1",'type' => 'submit', 'name' => 'submit'], 'Submit'));
+$form = new Form(['enctype' => 'multipart/form-data', 'class' => 'form', 'action' => '', 'method' => 'post', 'id' => 'border']);
+$form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi', ['required']));
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['required']));
+$form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000', ['required']));
+$form->addElement(new Button('button', ['id' => 'btnListeContact1', 'type' => 'submit', 'name' => 'submit'], 'Submit'));
 ?>
+
 
 <html>
 <head>
@@ -53,6 +50,6 @@ $form->addElement(new Button('button', ['id'=>"btnListeContact1",'type' => 'subm
 <div id="corps">
   <h1>Nouveau Contact</h1>
   <a typ="button" id="btnListeContact" href="index.php">Liste Contacts</a>
-  <p><?= $form->render(); ?>
+  <p><?php echo $form->render(); ?>
 </body>
 </html>

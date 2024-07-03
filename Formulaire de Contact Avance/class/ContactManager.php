@@ -1,40 +1,43 @@
 <?php
-/* 
- * ContactManager 
+/*
+ * ContactManager
  * Cette classe fait du crud operation  (connect, insert, update, and delete)
  * @author    Patrick Mukendi
- * @url        http://github 
+ * @url        http://github
  */
-namespace Contact\Class; 
+
+namespace Contact\Class;
 
 class ContactManager
 {
-    private  FileHandler $fileHandler;
+    private FileHandler $fileHandler;
 
     public function __construct()
     {
         $this->fileHandler = new FileHandler();
     }
 
-    public function readAllData(): array | bool
+    public function readAllData(): array|bool
     {
-        return $this->fileHandler->getRows();;
+        return $this->fileHandler->getRows();
     }
 
-    public function readSingleData(): array | bool
+    public function readSingleData(): array|bool
     {
         $contact = new Contact();
+
         return $this->fileHandler->getSingle($contact->getId());
     }
 
-    public function addData(string $name, string $email, string $phone): bool
+    public function addData(string $name, string $email, string $phone): bool|int
     {
-        $contact = new Contact(null, $name, $email, $phone);
+        $contact = new Contact(0, $name, $email, $phone);
         $contacts = [
             'name' => $contact->getName(),
             'email' => $contact->getEmail(),
-            'phone' => $contact->getPhone()
+            'phone' => $contact->getPhone(),
         ];
+
         return $this->fileHandler->insert($contacts);
     }
 
@@ -45,13 +48,13 @@ class ContactManager
         $contacts = [
             'name' => $contact->getName(),
             'email' => $contact->getEmail(),
-            'phone' => $contact->getPhone()
+            'phone' => $contact->getPhone(),
         ];
 
         return $this->fileHandler->update($contacts, $id_str);
     }
 
-    public function delete(int $id): bool
+    public function delete(int $id): mixed
     {
         return $this->fileHandler->delete($id);
     }

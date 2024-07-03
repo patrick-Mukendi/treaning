@@ -1,24 +1,18 @@
 <?php
+
 require '../vendor/autoload.php';
-use Contact\Class\{
-  ContactManager,
-  Contact
-};
-use App\{
-  Form,
-  Session,
-  Cookie,
-};
-use App\HTML\{
-  Input,
-  Button
-};
+use App\Cookie;
+use App\Form;
+use App\HTML\Button;
+use App\HTML\Input;
+use App\Session;
+use Contact\Class\ContactManager;
 
 Session::start();
 $id_str = '';
 
 Cookie::set('PC1', $_POST['name'] ?? '');
-$cookie = Cookie::get('PC1', "user");
+$cookie = Cookie::get('PC1', 'user');
 
 $db = new ContactManager();
 
@@ -27,26 +21,24 @@ $name = trim(strip_tags(isset($_POST['name']) ? $_POST['name'] : ''));
 $email = trim(strip_tags(isset($_POST['email']) ? $_POST['email'] : ''));
 $phone = trim(strip_tags(isset($_POST['phone']) ? $_POST['phone'] : ''));
 
-if (!empty($name)) 
-{
-  $update =  $db->updateDate($id, $name, $email, $phone);
-  if ($update) 
-  {
-    header("Location: index.php"); 
-    exit();
-  }
+if (!empty($name)) {
+    $update = $db->updateDate($id, $name, $email, $phone);
+    if ($update) {
+        header('Location: index.php');
+        exit;
+    }
 }
 
 Session::set('$_POST["Gest"]', $name, $email);
 $session = Session::get('Gest', 'username');
 $username = $session[1];
-$mail =  $session[2];
+$mail = $session[2];
 
-$form = new Form(['enctype' => 'multipart/form-data','class'=>'form', 'action' => '', 'method' => 'post','id'=>'border']);
+$form = new Form(['enctype' => 'multipart/form-data', 'class' => 'form', 'action' => '', 'method' => 'post', 'id' => 'border']);
 $form->addElement(new Input('text', 'name', 'Ex:Patrick Mukendi', ['required']));
-$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com',['required']));
-$form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000',['required']));
-$form->addElement(new Button('button', ['id'=>"btnListeContact1",'type' => 'submit', 'name' => 'submit'], 'Submit'));
+$form->addElement(new Input('email', 'email', 'Ex:mdipatrick5@gmail.com', ['required']));
+$form->addElement(new Input('tel', 'phone', 'Ex:+243 000 000 000', ['required']));
+$form->addElement(new Button('button', ['id' => 'btnListeContact1', 'type' => 'submit', 'name' => 'submit'], 'Submit'));
 ?>
 
 <html>

@@ -1,4 +1,5 @@
 <?php
+
 $valeurX = isset($_POST['valeurx']) ? (float) $_POST['valeurx'] : 0;
 $valeurY = isset($_POST['valeury']) ? (float) $_POST['valeury'] : 0;
 $operation = $_POST['operation'] ?? '+';
@@ -8,8 +9,8 @@ if (!empty($_POST)) {
         '+' => $resulat = $valeurX + $valeurY,
         '*' => $resultat = $valeurX * $valeurY,
         '-' => $resulat = $valeurX - $valeurY,
-        '/' => $resulat = $valeurY != 0 ? $valeurX / $valeurY : "Erreur, division par 0 impossible",
-        default => "" 
+        '/' => $resulat = $valeurY != 0 ? $valeurX / $valeurY : 'Erreur, division par 0 impossible',
+        default => ''
     };
 }
 ?>

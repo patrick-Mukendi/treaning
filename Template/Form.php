@@ -1,40 +1,40 @@
 <?php
+
 namespace App;
+
 use App\HTML\HTMLElement;
 
-class Form extends  HTMLElement
+class Form extends HTMLElement
 {
     private array $content;
 
-    public function __construct (private array $attributs = [] )
+    public function __construct(private array $attributs = [])
     {
-        $this->attributs= $attributs;
+        $this->attributs = $attributs;
     }
 
-    private function attribut() : string
+    private function attribut(): string
     {
         $attributs = '';
 
-        foreach($this->attributs as $key => $value)
-        {
+        foreach ($this->attributs as $key => $value) {
             $attributs .= sprintf('%s="%s" ', $key, $value);
         }
+
         return $attributs;
     }
 
-    public function addElement($element): void
+    public function addElement(object $element): void
     {
-        $elements = $element;
-        $this->content[] =  $elements->render();
+        $this->content[] = $element;
     }
 
     public function render(): string
     {
         $element = sprintf('<form %s >', $this->attribut());
 
-        foreach ($this->content as $values)
-        {
-            $element .= $values;
+        foreach ($this->content as $values) {
+            $element .= $values->render();
         }
         $element .= '</form>';
 

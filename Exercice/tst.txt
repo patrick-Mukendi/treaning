@@ -1,4 +1,16 @@
 <?php 
+
+    /* public function creat()
+    {
+    $destinationFile = "json_files";
+    $nameFile = "data.json";
+    $open = fopen('../'.$destinationFile.$nameFile,'w+');
+    fclose($open);
+
+    return $open;
+    }
+     */
+     
 // Start session 
 session_start(); 
  
@@ -118,6 +130,7 @@ if(isset($_POST['userSubmit'])){
 } 
  
 // Redirect to the respective page 
+
 header("Location:".$redirectURL); 
 exit(); 
 ?>

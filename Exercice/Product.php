@@ -1,4 +1,5 @@
 <?php
+
 class Product
 {
     private string $name;
@@ -9,10 +10,10 @@ class Product
         $this->name = $name;
         $this->price = $price;
     }
-    
+
     public function __clone()
     {
-        $this->name = $this->name . 'Clone';
+        $this->name .= 'Clone';
     }
 
     public function getName(): string

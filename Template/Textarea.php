@@ -1,10 +1,12 @@
 <?php
+
 namespace App;
+
 use App\HTML\HTMLElement;
 
-class Textarea extends HTMLElement 
+class Textarea extends HTMLElement
 {
-    public function __construct(private string $name, private string $content, private array $attributs = [] )
+    public function __construct(private string $name, private string $content, private array $attributs = [])
     {
         $this->name = $name;
         $this->attributs = $attributs;
@@ -14,19 +16,19 @@ class Textarea extends HTMLElement
     private function attribut(): string
     {
         $attributs = '';
-        
-        foreach($this->attributs as $key => $values)
-        {
+
+        foreach ($this->attributs as $key => $values) {
             $attributs .= sprintf('%s="%s"', htmlspecialchars($key), htmlspecialchars($values));
         }
+
         return $attributs;
     }
 
-    public function  render(): string
+    public function render(): string
     {
         return sprintf(
-            '<textarea name="%s" %s placeholder="%s" ></textarea>', 
-            $this->name, 
+            '<textarea name="%s" %s placeholder="%s" ></textarea>',
+            $this->name,
             $this->attribut(),
             $this->content);
     }

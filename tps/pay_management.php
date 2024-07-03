@@ -1,44 +1,35 @@
 <?php
-$salaireHoraire = isset($_GET['salaireHoraire']) ? (float)$_GET['salaireHoraire'] : 0;
-$nombreHeure = isset($_GET['nombreHeure']) ? (int)$_GET['nombreHeure'] : 0;
-$nombreHeureWeekend = isset($_GET['nombreHeureWeekend']) ? (int)$_GET['nombreHeureWeekend'] : 0;
-$heureNormale = isset($_GET['heureNormale']) ? (int)$_GET['heureNormale'] : 0;
 
-$isError = NULL;
+$salaireHoraire = isset($_GET['salaireHoraire']) ? (float) $_GET['salaireHoraire'] : 0;
+$nombreHeure = isset($_GET['nombreHeure']) ? (int) $_GET['nombreHeure'] : 0;
+$nombreHeureWeekend = isset($_GET['nombreHeureWeekend']) ? (int) $_GET['nombreHeureWeekend'] : 0;
+$heureNormale = isset($_GET['heureNormale']) ? (int) $_GET['heureNormale'] : 0;
+
+$isError = null;
 $paySurplus = 0;
-$operation1 = ($heureNormale<$nombreHeure) ? $nombreHeure-$heureNormale : 0;
+$operation1 = ($heureNormale < $nombreHeure) ? $nombreHeure - $heureNormale : 0;
 
-if($salaireHoraire < 0 || $nombreHeure < 0 || $nombreHeureWeekend < 0 || $heureNormale < 0 || empty($_POST))
-{
-    $isError = "Valeur negative ou vide non valide";
-}
-else
-{
+if ($salaireHoraire < 0 || $nombreHeure < 0 || $nombreHeureWeekend < 0 || $heureNormale < 0 || empty($_POST)) {
+    $isError = 'Valeur negative ou vide non valide';
+} else {
+    if ($operation1 != 0) {
+        if ($nombreHeureWeekend >= 2) {
+            $paySurplus += 2 * ($salaireHoraire * 200 / 100);
+            $operation1 -= $nombreHeureWeekend;
+        }
 
- if($operation1 != 0)
- {
-    if($nombreHeureWeekend >= 2)
-    {
-       $paySurplus += 2 * ($salaireHoraire * 200 / 100);
-       $operation1 -= $nombreHeureWeekend;
-    }
+        if ($operation1 >= 6) {
+            $paySurplus += 6 * ($salaireHoraire * 130 / 100);
+            $operation1 -= 6;
+        } else {
+            $paySurplus += $operation1 * ($salaireHoraire * 130 / 100);
+            $operation1 -= $operation1;
+        }
 
-    if($operation1 >= 6)
-    {
-       $paySurplus += 6 * ($salaireHoraire * 130 / 100);
-       $operation1 -= 6;
+        if ($operation1 != 0) {
+            $paySurplus += $operation1 * ($salaireHoraire * 150 / 100);
+        }
     }
-    else
-    {
-       $paySurplus += $operation1 * ($salaireHoraire * 130 / 100);
-       $operation1 -= $operation1;
-    }
-
-    if($operation1 != 0)
-    {
-       $paySurplus += $operation1 * ($salaireHoraire * 150 / 100);
-    }
-   }
 }
 
 $paySurplus += $heureNormale * $salaireHoraire;

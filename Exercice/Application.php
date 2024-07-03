@@ -1,4 +1,5 @@
 <?php
+
 require_once "Traits\Logger.php";
 
 class Application
