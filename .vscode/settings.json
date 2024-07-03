@@ -1,4 +1,0 @@
-{
-    "php-cs-fixer.configFile": "php-cs-fixer.executable, php-cs-fixer.configFile, php-cs-fixer.pathMode, php-cs-fixer.onSave, php-cs-fixer.allowRisky=true",
-    "php-cs-fixer.allowRisky": true
-}
