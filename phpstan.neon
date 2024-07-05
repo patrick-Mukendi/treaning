@@ -6,6 +6,7 @@ parameters :
         - tps
         - Football
         - Exercice
+        - Essaie
         
     
     ignoreErrors:
